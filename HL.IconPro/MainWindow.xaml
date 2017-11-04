@@ -1,0 +1,70 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:HL.IconPro.MVVM.ViewModels"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:local="clr-namespace:HL.IconPro" x:Class="HL.IconPro.MainWindow"
+        Title="ICON PRO" Height="520" Width="720" MinWidth="720" MinHeight="520" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Icon="Icon Pro.ico">
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+    <Window.Background>
+        <SolidColorBrush Color="{DynamicResource WindowBackgroundColor}"/>
+    </Window.Background>
+    <Grid>
+        <Grid Margin="10,0" VerticalAlignment="Center" Height="321">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="59*"/>
+                <ColumnDefinition Width="40*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="FRAMES" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0"/>
+            <ListBox HorizontalAlignment="Center" Height="256" VerticalAlignment="Center" Width="200" ItemsSource="{Binding Frames}" ItemTemplate="{DynamicResource FrameItemTemplate}" SelectedItem="{Binding SelectedFrame, Mode=TwoWay}">
+                <ListBox.Resources>
+                    <DataTemplate x:Key="FrameItemTemplate">
+                        <Grid>
+                            <Image HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="32" Source="{Binding Frame, Mode=OneWay}"/>
+                            <Label Content="{Binding ToString, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="36,0,0,0"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.Resources>
+            </ListBox>
+            <Label Content="PREVIEW" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1" Margin="0,5,0,0"/>
+            <Border BorderBrush="#FFCACACA" HorizontalAlignment="Center" Height="256" VerticalAlignment="Center" Width="256" Grid.Column="1">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="0"/>
+                </Border.Effect>
+                <Border.Background>
+                    <ImageBrush ImageSource="Images/Transparency Grid.png" Stretch="UniformToFill"/>
+                </Border.Background>
+                <Image Source="{Binding Preview, Mode=OneWay}" Stretch="None"/>
+            </Border>
+            <Label Content="INFORMATIONS" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0" Grid.Column="2"/>
+            <Border BorderBrush="#FFC4C4C4" BorderThickness="1" Grid.Column="2" HorizontalAlignment="Center" Height="256" VerticalAlignment="Center" Width="200" Background="White">
+                <ItemsControl ItemsSource="{Binding Informations}" ItemTemplate="{DynamicResource InformationItemTemplate}">
+                    <ItemsControl.Resources>
+                        <DataTemplate x:Key="InformationItemTemplate">
+                            <Label Content="{Binding ToString, Mode=OneWay}"/>
+                        </DataTemplate>
+                    </ItemsControl.Resources>
+                </ItemsControl>
+            </Border>
+        </Grid>
+        <Border BorderBrush="{DynamicResource ButtonBorderBrush}" BorderThickness="0,0,0,1" Height="75.4" VerticalAlignment="Top">
+            <Grid HorizontalAlignment="Center" Width="429">
+                <Label Content="FILE" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="10.667"/>
+                <Button Content="HOME" HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Center" Width="75" Command="{Binding HomeCommand, Mode=OneWay}" CommandParameter="{Binding Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"/>
+                <Button Content="SAVE" HorizontalAlignment="Right" Margin="120,0" VerticalAlignment="Center" Width="75" Command="{Binding SaveCommand, Mode=OneWay}" IsEnabled="{Binding CanSave, Mode=OneWay}"/>
+                <Button Content="EXPORT" HorizontalAlignment="Right" Margin="0,0,40,0" VerticalAlignment="Center" Width="75" Command="{Binding ExportCommand, Mode=OneWay}" IsEnabled="{Binding CanExport, Mode=OneWay}" ToolTip="Export all the frames to a folder"/>
+                <Button Content="OPEN" HorizontalAlignment="Left" Margin="120,0,0,0" VerticalAlignment="Center" Width="75" Command="{Binding OpenCommand, Mode=OneWay}"/>
+            </Grid>
+        </Border>
+        <Border BorderBrush="{DynamicResource ButtonBorderBrush}" BorderThickness="0,1,0,0" Height="75.4" VerticalAlignment="Bottom">
+            <Grid HorizontalAlignment="Center" Width="429">
+                <Label Content="FRAME" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10.667"/>
+                <Button Content="DELETE" HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Center" Width="75" Command="{Binding DeleteFrameCommand, Mode=OneWay}" IsEnabled="{Binding CanDeleteFrame, Mode=OneWay}"/>
+                <Button Content="EXPORT" HorizontalAlignment="Right" Margin="0,0,40,0" VerticalAlignment="Center" Width="75" Command="{Binding ExportFrameCommand, Mode=OneWay}" IsEnabled="{Binding CanExportFrame, Mode=OneWay}"/>
+                <Button Content="CREATE" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="75" Command="{Binding CreateFrameCommand, Mode=OneWay}"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

@@ -1,0 +1,33 @@
+﻿<Window
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:vm="clr-namespace:HL.IconPro.MVVM.ViewModels"
+	x:Class="HL.IconPro.CreateFrame"
+	x:Name="Window"
+	Title="FRAME WIZARD"
+	Width="470.512" Height="440.018" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="/iconpro;component/Icon Pro.ico">
+	<Window.Background>
+		<SolidColorBrush Color="{DynamicResource WindowBackgroundColor}"/>
+	</Window.Background>
+	<Window.DataContext>
+        <vm:CreateFrameViewModel/>
+    </Window.DataContext>
+	<Grid x:Name="LayoutRoot">
+		<Button Content="CREATE" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="75" CommandParameter="{Binding Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Command="{Binding CreateCommand, Mode=OneWay}" Margin="70,0,0,10"/>
+		<Button Content="CANCEL" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" CommandParameter="{Binding Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Command="{Binding CancelCommand, Mode=OneWay}" Margin="0,0,70,10"/>
+		<Label Content="PREVIEW" HorizontalAlignment="Center" Margin="0,12,0,0" VerticalAlignment="Top"/>
+		<Border BorderBrush="#FFCACACA" HorizontalAlignment="Center" Height="256" VerticalAlignment="Top" Width="256" Margin="0,44,0,0">
+			<Border.Effect>
+				<DropShadowEffect ShadowDepth="0"/>
+			</Border.Effect>
+			<Border.Background>
+				<ImageBrush ImageSource="/HL.IconPro;component/Images/Transparency Grid.png" Stretch="UniformToFill"/>
+			</Border.Background>
+			<Image Source="{Binding Preview, Mode=OneWay}" Stretch="None"/>
+		</Border>
+		<Label Content="SIZE:" HorizontalAlignment="Left" Margin="53,0,0,55" VerticalAlignment="Bottom"/>
+		<ComboBox HorizontalAlignment="Left" Margin="94.207,0,0,53" VerticalAlignment="Bottom" Width="120" ItemsSource="{Binding SupportedSizes}" SelectedIndex="{Binding SelectedSizeIndex}"/>
+		<Label Content="BPP:" HorizontalAlignment="Left" Margin="236.207,0,0,55" VerticalAlignment="Bottom"/>
+		<ComboBox HorizontalAlignment="Left" Margin="274.512,0,0,52.733" VerticalAlignment="Bottom" Width="120" ItemsSource="{Binding BitDepths}" SelectedIndex="{Binding SelectedBitDepthIndex}"/>
+	</Grid>
+</Window>

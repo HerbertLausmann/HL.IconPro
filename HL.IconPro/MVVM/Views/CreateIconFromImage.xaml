@@ -1,0 +1,43 @@
+﻿<Window
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	x:Class="HL.IconPro.CreateIconFromImage"
+	x:Name="Window"
+    xmlns:vm="clr-namespace:HL.IconPro.MVVM.ViewModels"
+	Title="ICON WIZARD"
+	Width="448" Height="493.6" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/iconpro;component/Icon Pro.ico">
+    <Window.DataContext>
+        <vm:CreateIconFromImageViewModel/>
+    </Window.DataContext>
+    <Window.Background>
+		<SolidColorBrush Color="{DynamicResource WindowBackgroundColor}"/>
+	</Window.Background>
+
+	<Grid x:Name="LayoutRoot">
+		<Label Content="PREVIEW" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top"/>
+		<Border BorderBrush="#FFCACACA" HorizontalAlignment="Center" Height="256" VerticalAlignment="Top" Width="256" Margin="0,43,0,0">
+			<Border.Effect>
+				<DropShadowEffect ShadowDepth="0"/>
+			</Border.Effect>
+			<Border.Background>
+				<ImageBrush ImageSource="/iconpro;component/Images/Transparency Grid.png" Stretch="UniformToFill"/>
+			</Border.Background>
+			<Image Source="{Binding Image}" Stretch="None"/>
+		</Border>
+		<Button Content="CREATE" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="75" Margin="39,0,0,10" CommandParameter="{Binding Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Command="{Binding CreateCommand, Mode=OneWay}"/>
+		<Button Content="CANCEL" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Margin="0,0,39,10" CommandParameter="{Binding Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Command="{Binding CancelCommand, Mode=OneWay}"/>
+		<ItemsControl HorizontalAlignment="Center" Height="120" VerticalAlignment="Bottom" ItemsPanel="{DynamicResource SizesPanelTemplate}" Margin="0,0,0,40" ItemsSource="{Binding Sizes}" ItemTemplate="{DynamicResource SizeItemTemplate}">
+			<ItemsControl.Resources>
+				<ItemsPanelTemplate x:Key="SizesPanelTemplate">
+					<WrapPanel Orientation="Vertical"/>
+				</ItemsPanelTemplate>
+				<DataTemplate x:Key="SizeItemTemplate">
+					<Grid>
+						<CheckBox Content="{Binding Size}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5" IsChecked="{Binding Checked}" IsEnabled="{Binding Enabled}"/>
+					</Grid>
+				</DataTemplate>
+			</ItemsControl.Resources>
+		</ItemsControl>
+		<ComboBox HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="188" Margin="0,0,0,10" ItemsSource="{Binding BitDepths}" SelectedIndex="{Binding SelectedBitDepth}" FontSize="13.333"/>
+	</Grid>
+</Window>

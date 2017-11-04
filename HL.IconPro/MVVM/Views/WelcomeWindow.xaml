@@ -1,0 +1,30 @@
+﻿<Window
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	x:Class="HL.IconPro.WelcomeWindow"
+    xmlns:vm="clr-namespace:HL.IconPro.MVVM.ViewModels"
+	x:Name="Window"
+	Title="WELCOME TO ICON PRO"
+	Width="458.343" Height="559.214" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/iconpro;component/Icon Pro.ico">
+    <Window.DataContext>
+        <vm:WelcomeWindowViewModel/>
+    </Window.DataContext>
+    <Window.Background>
+        <SolidColorBrush Color="{DynamicResource WindowBackgroundColor}"/>
+    </Window.Background>
+    
+    <Grid x:Name="LayoutRoot">
+        <Label Content="WHAT WOULD YOU LIKE TO DO?" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16" Margin="0,10,0,0"/>
+        <StackPanel Margin="0,49,0,90" Width="341">
+            <Button Content="EXTRACT AN ICON" Height="64" Margin="10,5,11,5" CommandParameter="{Binding Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Command="{Binding ExtractIconCommand, Mode=OneWay}" ToolTip="Extract an icon from an executable file (.exe, .dll)"/>
+            <Button x:Name="CreateIcon" Content="CREATE AN ICON FROM AN IMAGE" Height="64" Margin="10,5,11,5" CommandParameter="{Binding Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Command="{Binding CreateFromImageCommand, Mode=OneWay}" ToolTip="You can create an Icon using a PNG image or a SVG file"/>
+            <Button Content="CREATE AN EMPTY ICON" Height="64" Margin="10,5,11,5" CommandParameter="{Binding Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Command="{Binding CreateAnEmptyIconCommand, Mode=OneWay}" ToolTip="Create an empty icon">
+            </Button>
+            <Button Content="OPEN AN ICON OR CURSOR FILE" Height="64" Margin="10,5,11,5" CommandParameter="{Binding Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Command="{Binding OpenFileCommand, Mode=OneWay}" ToolTip="Open an icon or a cursor file"/>
+            <Button Content="NOTHING" Height="64" Margin="10,5,11,5" CommandParameter="{Binding Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Command="{Binding NothingCommand, Mode=OneWay}" ToolTip="Exit application"/>
+        </StackPanel>
+        <TextBlock HorizontalAlignment="Center" Margin="0,0,0,70" TextWrapping="Wrap" Text="{Binding VersionSoftware, Mode=OneWay}" VerticalAlignment="Bottom"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,0,0,40" TextWrapping="Wrap" Text="{Binding VersionWpfCore, Mode=OneWay}" VerticalAlignment="Bottom"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,0,0,10" TextWrapping="Wrap" Text="{Binding VersionCore, Mode=OneWay}" VerticalAlignment="Bottom"/>
+    </Grid>
+</Window>
