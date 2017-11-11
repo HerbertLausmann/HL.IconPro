@@ -1,0 +1,45 @@
+@charset "utf-8";
+
+/* Print Styles */
+
+body { font-size:0.8em; text-align:center; }
+#siteNav, #footer, #network, #headerLinks, #headerLinksOpener, .backtonav { display: none; }
+div,ul,td,li,th,span,span,p,select,input,form,textarea,label
+	{ font-family: "Lucida Grande", Calibri, Arial, Helvetica, sans-serif; font-size:100%; text-align:left; }
+h1, h2, h3 { font-family: "Lucida Grande", Calibri, Arial, Helvetica, sans-serif; }
+h1 { font-size: 175%; margin:1em 0 0 0; }
+h2 { font-size: 150%; }
+h3 { font-size: 135%; } 							/* Approx 16px */
+h4 { font-size: 110%; line-height:2em; } 			/* Approx 13px */
+h5 { font-size: 100%; line-height:2em; } 			/* Approx 12px */
+
+img { border:none; }
+
+a:link, a:visited, a:active { color: #000000!important; text-decoration: underline; }
+
+#contentPrint { margin: 0 auto 25px auto; padding: 0; width: 70%; }
+#intro { border:1px solid #999; background-color:#eee; padding:.5em; margin:1em 0; }
+#intro img { width: 100px; float: left; margin: 3px; }
+
+.styleTypeNone li { list-style-type:none; }
+/* the style below ensures that a bullet will appear on nested list items */
+.styleTypeNone li li, .styleTypeNone li li li { list-style-type:disc; }
+#content table { border:1px solid #999; margin-bottom:2em; border-collapse: collapse; }
+#content td { padding:0.5em; border:1px solid #999; }
+
+/* Safari Purchase Reward */
+.reward img { width: 95%; }
+
+/* Articles */
+#articleLongDescription { font-size: 1.2em; line-height: 1.4em; margin: 2em 0; padding-top: 1em; border-top: 1px solid #c0c0c0; }
+.figure { margin: 2em 0 4em 0; }
+.sidebar { border: 1px solid #c0c0c0; padding: .5em 1em; margin: 2em 0; }
+.sidebar .title { font-weight: bold; }
+
+/* Footer */
+#printFooter { margin-top: 2em; border-top: 1px solid #000; padding-top: 2em; }
+#printFooter p { text-align:center; font-size:.9em; color:#000; margin:0 auto; }
+#printFooter p.copyright { margin:0; padding:0;}
+#printFooter p.address { margin:0 0 15px 0; padding:0;}
+
+

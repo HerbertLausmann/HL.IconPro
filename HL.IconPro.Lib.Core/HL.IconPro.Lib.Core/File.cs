@@ -127,6 +127,22 @@ namespace HL.IconPro.Lib.Core
                 _frames.Insert(i, fr);
             }
         }
+
+        public byte[] GetBuffer()
+        {
+            MemoryStream output = new MemoryStream();
+            Write(output);
+            return output.ToArray();
+        }
+
+        public static File FromBuffer(byte[] source)
+        {
+            MemoryStream src = new MemoryStream(source);
+            src.Position = 0;
+            File f = new File();
+            f.Read(src);
+            return f;
+        }
     }
 
     /// <summary>

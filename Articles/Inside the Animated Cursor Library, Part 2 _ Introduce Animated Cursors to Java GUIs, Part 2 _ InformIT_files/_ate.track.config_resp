@@ -1,0 +1,1 @@
+_ate.track.config_resp({"customMessageTemplates":[],"subscription":{"active":true,"edition":"BASIC","tier":"basic","reducedBranding":false,"insightsEnabled":false}});

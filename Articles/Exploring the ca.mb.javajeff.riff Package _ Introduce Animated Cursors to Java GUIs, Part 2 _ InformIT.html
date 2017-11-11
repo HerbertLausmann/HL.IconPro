@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<!-- saved from url=(0064)http://www.informit.com/articles/article.aspx?p=1189080&seqNum=2 -->
+<html class=" js touch hashchange borderradius boxshadow fontface no-generatedcontent video no-flash localstorage" xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:scr="urn:scr.this" style=""><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/4148.js.download" async="" type="text/javascript"></script><script type="text/javascript" src="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/300lo.json"></script><script type="text/javascript" src="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/_ate.track.config_resp"></script><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="verify-v1" content="jKqgZt8qtZUt+IrazV2fydKUZG2KKR8QEUoYjH9tth4="><title>Exploring the ca.mb.javajeff.riff Package | Introduce Animated Cursors to Java GUIs, Part 2 | InformIT</title><link href="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/style-blessed1.css" rel="stylesheet" type="text/css" xmlns:msxsl="urn:schemas-microsoft-com:xslt"><link href="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/style.css" rel="stylesheet" type="text/css" xmlns:msxsl="urn:schemas-microsoft-com:xslt"><link href="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/print.css" rel="stylesheet" media="print" type="text/css" xmlns:msxsl="urn:schemas-microsoft-com:xslt"><link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://www.informit.com/display/InformIT/images/objects/touch_icons/apple-touch-icon-144x144-precomposed.png" xmlns:msxsl="urn:schemas-microsoft-com:xslt"><link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://www.informit.com/display/InformIT/images/objects/touch_icons/apple-touch-icon-114x114-precomposed.png" xmlns:msxsl="urn:schemas-microsoft-com:xslt"><link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://www.informit.com/display/InformIT/images/objects/touch_icons/apple-touch-icon-72x72-precomposed.png" xmlns:msxsl="urn:schemas-microsoft-com:xslt"><link rel="apple-touch-icon-precomposed" href="http://www.informit.com/display/InformIT/images/objects/touch_icons/apple-touch-icon-precomposed.png" xmlns:msxsl="urn:schemas-microsoft-com:xslt"><script async="" src="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/analytics.js.download"></script><script async="" src="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/fbds.js.download"></script><script language="JavaScript" src="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/AdobeAnalyticsScript.js.download" type="text/JavaScript" xmlns:msxsl="urn:schemas-microsoft-com:xslt"></script><script src="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/satelliteLib-34fea3c356e1d487f7d10ec820ed37ed3d41be4f.js.download" xmlns:msxsl="urn:schemas-microsoft-com:xslt"></script><script type="text/javascript" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+      var arr = window.location.pathname.split('/');
+      var host = window.location.host;
+      var siteId = '';
+      
+      if(host.indexOf('informit') != -1) {
+        siteId = 'InformIT';
+      }
+      else if(host.indexOf('peachpit') != -1) {
+        siteId = 'Peachpit';
+      }
+      else if(host.indexOf('que') != -1) {
+        siteId = 'Que';
+      }
+      else if(host.indexOf('certification') != -1) {
+        siteId = 'PITC';
+      }
+      
+      var digitalData = {
+                          version: "1.0",
+                          site: {
+                                  siteId: siteId,
+                                  siteLabel: "InformIT",
+                                  domain: location.host,
+                                  siteSection: arr[1]
+                                },
+                        page:{
+                              pageInfo:{
+                                        pageName: ':' + arr[1],
+                                        pageTitle:document.title,
+                                        pageURL:window.location.pathname + window.location.search + window.location.hash
+                                      }
+                             }
+                        };
+      
+      if(arr[1].indexOf('.asp') != -1 || arr[1].indexOf('.aspx') != -1) {
+      var splitPageData = arr[1].split('.');
+      digitalData["site"]["siteSection"]='';
+      digitalData["page"]["pageInfo"]["pageName"]=':' + splitPageData[0];
+      }
+                        
+      if(CheckFormPage() == true) {
+        digitalData["page"] = {
+                            pageInfo:{
+                                      formName:" ",
+                                      pageURL:window.location.pathname + window.location.search + window.location.hash,
+                                      
+                                      siteSection: arr[1] 
+                                    }
+                            };
+      }
+    </script><script language="JavaScript" src="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/modernizr.custom.js.download" type="text/javascript" xmlns:msxsl="urn:schemas-microsoft-com:xslt"></script><script language="JavaScript" src="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/jquery.js.download" type="text/JavaScript" xmlns:msxsl="urn:schemas-microsoft-com:xslt"></script><script language="JavaScript" src="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/global.js.download" type="text/JavaScript" xmlns:msxsl="urn:schemas-microsoft-com:xslt"></script><!--[if lte IE 8]><script language="JavaScript" src="/display/common/javascript/respond.min.js" type="text/JavaScript"></script><![endif]--><script language="JavaScript" src="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/swfobject.js.download" type="text/JavaScript" xmlns:msxsl="urn:schemas-microsoft-com:xslt"></script><script language="JavaScript" src="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/jquery-ui-1.10.2.custom.min.js.download" type="text/JavaScript" xmlns:msxsl="urn:schemas-microsoft-com:xslt"></script><script language="JavaScript" src="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/fastclick.min.js.download" type="text/JavaScript" xmlns:msxsl="urn:schemas-microsoft-com:xslt"></script><link rel="canonical" href="http://www.informit.com/articles/article.aspx?p=1189080&amp;seqNum=2">
+            <link rel="prev" href="http://www.informit.com/articles/article.aspx?p=1189080">
+            <link rel="next" href="http://www.informit.com/articles/article.aspx?p=1189080&amp;seqNum=3">
+        
+                <meta name="pageType" content="Articles and Sample Chapters">
+            <meta name="publishedDate" content="Apr 18, 2008">
+                <meta name="description" content="Jeff Friesen continues his three-part series on a Java-based animated cursor library.">
+            
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+            
+        <link rel="shortcut icon" href="http://www.informit.com/display/InformIT/images/objects/favicon.ico?v=20141110"><script xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+          (function(d){
+            var e=d.createElement('script');
+            e.src='https://td.yieldify.com/yieldify/code.js?w_uuid=319c38ba-d8c1-4c13-ad45-545e025f89d3&k=1&loca='+window.location.href;
+            e.async=true;
+            d.getElementsByTagName('head')[0].appendChild(e);
+          }(document));
+      </script><script src="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/code.js.download" async=""></script><script xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+      (function() {
+          var _fbq = window._fbq || (window._fbq = []);
+          if (!_fbq.loaded) {
+              var fbds = document.createElement('script');
+              fbds.async = true;
+              fbds.src = '//connect.facebook.net/en_US/fbds.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(fbds, s);
+              _fbq.loaded = true;
+          }
+          _fbq.push(['addPixelId', '730048657068506']);
+      })();
+      
+      window._fbq = window._fbq || [];
+      window._fbq.push(['track', 'PixelInitialized', {}]);
+    </script><noscript xmlns:msxsl="urn:schemas-microsoft-com:xslt">&lt;img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=730048657068506&amp;amp;ev=PixelInitialized" /&gt;</noscript><style type="text/css">.at-icon{fill:#fff;border:0}.at-icon-wrapper{display:inline-block;overflow:hidden}a .at-icon-wrapper{cursor:pointer}.at-rounded,.at-rounded-element .at-icon-wrapper{border-radius:12%}.at-circular,.at-circular-element .at-icon-wrapper{border-radius:50%}.addthis_32x32_style .at-icon{width:2pc;height:2pc}.addthis_24x24_style .at-icon{width:24px;height:24px}.addthis_20x20_style .at-icon{width:20px;height:20px}.addthis_16x16_style .at-icon{width:1pc;height:1pc}#at16lb{display:none;position:absolute;top:0;left:0;width:100%;height:100%;z-index:1001;background-color:#000;opacity:.001}#at_complete,#at_error,#at_share,#at_success{position:static!important}.at15dn{display:none}#at15s,#at16p,#at16p form input,#at16p label,#at16p textarea,#at_share .at_item{font-family:arial,helvetica,tahoma,verdana,sans-serif!important;font-size:9pt!important;outline-style:none;outline-width:0;line-height:1em}* html #at15s.mmborder{position:absolute!important}#at15s.mmborder{position:fixed!important;width:250px!important}#at15s{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABtJREFUeNpiZGBgaGAgAjAxEAlGFVJHIUCAAQDcngCUgqGMqwAAAABJRU5ErkJggg==);float:none;line-height:1em;margin:0;overflow:visible;padding:5px;text-align:left;position:absolute}#at15s a,#at15s span{outline:0;direction:ltr;text-transform:none}#at15s .at-label{margin-left:5px}#at15s .at-icon-wrapper{width:1pc;height:1pc;vertical-align:middle}#at15s .at-icon{width:1pc;height:1pc}.at4-icon{display:inline-block;background-repeat:no-repeat;background-position:top left;margin:0;overflow:hidden;cursor:pointer}.addthis_16x16_style .at4-icon,.addthis_default_style .at4-icon,.at4-icon,.at-16x16{width:1pc;height:1pc;line-height:1pc;background-size:1pc!important}.addthis_32x32_style .at4-icon,.at-32x32{width:2pc;height:2pc;line-height:2pc;background-size:2pc!important}.addthis_24x24_style .at4-icon,.at-24x24{width:24px;height:24px;line-height:24px;background-size:24px!important}.addthis_20x20_style .at4-icon,.at-20x20{width:20px;height:20px;line-height:20px;background-size:20px!important}.at4-icon.circular,.circular .at4-icon,.circular.aticon{border-radius:50%}.at4-icon.rounded,.rounded .at4-icon{border-radius:4px}.at4-icon-left{float:left}#at15s .at4-icon{text-indent:20px;padding:0;overflow:visible;white-space:nowrap;background-size:1pc;width:1pc;height:1pc;background-position:top left;display:inline-block;line-height:1pc}.addthis_vertical_style .at4-icon,.at4-follow-container .at4-icon{margin-right:5px}html>body #at15s{width:250px!important}#at15s.atm{background:none!important;padding:0!important;width:10pc!important}#at15s_inner{background:#fff;border:1px solid #fff;margin:0}#at15s_head{position:relative;background:#f2f2f2;padding:4px;cursor:default;border-bottom:1px solid #e5e5e5}.at15s_head_success{background:#cafd99!important;border-bottom:1px solid #a9d582!important}.at15s_head_success a,.at15s_head_success span{color:#000!important;text-decoration:none}#at15s_brand,#at15sptx,#at16_brand{position:absolute}#at15s_brand{top:4px;right:4px}.at15s_brandx{right:20px!important}a#at15sptx{top:4px;right:4px;text-decoration:none;color:#4c4c4c;font-weight:700}#at15sptx:hover{text-decoration:underline}#at16_brand{top:5px;right:30px;cursor:default}#at_hover{padding:4px}#at_hover .at_item,#at_share .at_item{background:#fff!important;float:left!important;color:#4c4c4c!important}#at_share .at_item .at-icon-wrapper{margin-right:5px}#at_hover .at_bold{font-weight:700;color:#000!important}#at_hover .at_item{width:7pc!important;padding:2px 3px!important;margin:1px;text-decoration:none!important}#at_hover .at_item.athov,#at_hover .at_item:focus,#at_hover .at_item:hover{margin:0!important}#at_hover .at_item.athov,#at_hover .at_item:focus,#at_hover .at_item:hover,#at_share .at_item.athov,#at_share .at_item:hover{background:#f2f2f2!important;border:1px solid #e5e5e5;color:#000!important;text-decoration:none}.ipad #at_hover .at_item:focus{background:#fff!important;border:1px solid #fff}.at15t{display:block!important;height:1pc!important;line-height:1pc!important;padding-left:20px!important;background-position:0 0;text-align:left}.addthis_button,.at15t{cursor:pointer}.addthis_toolbox a.at300b,.addthis_toolbox a.at300m{width:auto}.addthis_toolbox a{margin-bottom:5px;line-height:initial}.addthis_toolbox.addthis_vertical_style{width:200px}.addthis_button_facebook_like .fb_iframe_widget{line-height:100%}.addthis_button_facebook_like iframe.fb_iframe_widget_lift{max-width:none}.addthis_toolbox a.addthis_button_counter,.addthis_toolbox a.addthis_button_facebook_like,.addthis_toolbox a.addthis_button_facebook_send,.addthis_toolbox a.addthis_button_facebook_share,.addthis_toolbox a.addthis_button_foursquare,.addthis_toolbox a.addthis_button_google_plusone,.addthis_toolbox a.addthis_button_linkedin_counter,.addthis_toolbox a.addthis_button_pinterest_pinit,.addthis_toolbox a.addthis_button_stumbleupon_badge,.addthis_toolbox a.addthis_button_tweet{display:inline-block}.at-share-tbx-element .google_plusone_iframe_widget>span>div{vertical-align:top!important}.addthis_toolbox span.addthis_follow_label{display:none}.addthis_toolbox.addthis_vertical_style span.addthis_follow_label{display:block;white-space:nowrap}.addthis_toolbox.addthis_vertical_style a{display:block}.addthis_toolbox.addthis_vertical_style.addthis_32x32_style a{line-height:2pc;height:2pc}.addthis_toolbox.addthis_vertical_style .at300bs{margin-right:4px;float:left}.addthis_toolbox.addthis_20x20_style span{line-height:20px}.addthis_toolbox.addthis_32x32_style span{line-height:2pc}.addthis_toolbox.addthis_pill_combo_style .addthis_button_compact .at15t_compact,.addthis_toolbox.addthis_pill_combo_style a{float:left}.addthis_toolbox.addthis_pill_combo_style a.addthis_button_tweet{margin-top:-2px}.addthis_toolbox.addthis_pill_combo_style .addthis_button_compact .at15t_compact{margin-right:4px}.addthis_default_style .addthis_separator{margin:0 5px;display:inline}div.atclear{clear:both}.addthis_default_style .addthis_separator,.addthis_default_style .at4-icon,.addthis_default_style .at300b,.addthis_default_style .at300bo,.addthis_default_style .at300bs,.addthis_default_style .at300m{float:left}.at300b img,.at300bo img{border:0}a.at300b .at4-icon,a.at300m .at4-icon{display:block}.addthis_default_style .at300b,.addthis_default_style .at300bo,.addthis_default_style .at300m{padding:0 2px}.at300b,.at300bo,.at300bs,.at300m{cursor:pointer}.addthis_button_facebook_like.at300b:hover,.addthis_button_facebook_like.at300bs:hover,.addthis_button_facebook_send.at300b:hover,.addthis_button_facebook_send.at300bs:hover{opacity:1}.addthis_20x20_style .at15t,.addthis_20x20_style .at300bs{overflow:hidden;display:block;height:20px!important;width:20px!important;line-height:20px!important}.addthis_32x32_style .at15t,.addthis_32x32_style .at300bs{overflow:hidden;display:block;height:2pc!important;width:2pc!important;line-height:2pc!important}.at300bs{overflow:hidden;display:block;background-position:0 0;height:1pc;width:1pc;line-height:1pc!important}.addthis_default_style .at15t_compact,.addthis_default_style .at15t_expanded{margin-right:4px}#at_share .at_item{width:123px!important;padding:4px;margin-right:2px;border:1px solid #fff}#at16p{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABtJREFUeNpiZGBgaGAgAjAxEAlGFVJHIUCAAQDcngCUgqGMqwAAAABJRU5ErkJggg==);z-index:10000001;position:absolute;top:50%;left:50%;width:300px;padding:10px;margin:0 auto;margin-top:-185px;margin-left:-155px;font-family:arial,helvetica,tahoma,verdana,sans-serif;font-size:9pt;color:#5e5e5e}#at_share{margin:0;padding:0}#at16pt{position:relative;background:#f2f2f2;height:13px;padding:5px 10px}#at16pt a,#at16pt h4{font-weight:700}#at16pt h4{display:inline;margin:0;padding:0;font-size:9pt;color:#4c4c4c;cursor:default}#at16pt a{position:absolute;top:5px;right:10px;color:#4c4c4c;text-decoration:none;padding:2px}#at15sptx:focus,#at16pt a:focus{outline:thin dotted}#at15s #at16pf a{top:1px}#_atssh{width:1px!important;height:1px!important;border:0!important}.atm{width:10pc!important;padding:0;margin:0;line-height:9pt;letter-spacing:normal;font-family:arial,helvetica,tahoma,verdana,sans-serif;font-size:9pt;color:#444;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABtJREFUeNpiZGBgaGAgAjAxEAlGFVJHIUCAAQDcngCUgqGMqwAAAABJRU5ErkJggg==);padding:4px}.atm-f{text-align:right;border-top:1px solid #ddd;padding:5px 8px}.atm-i{background:#fff;border:1px solid #d5d6d6;padding:0;margin:0;box-shadow:1px 1px 5px rgba(0,0,0,.15)}.atm-s{margin:0!important;padding:0!important}.atm-s a:focus{border:transparent;outline:0;transition:none}#at_hover.atm-s a,.atm-s a{display:block;text-decoration:none;padding:4px 10px;color:#235dab!important;font-weight:400;font-style:normal;transition:none}#at_hover.atm-s .at_bold{color:#235dab!important}#at_hover.atm-s a:hover,.atm-s a:hover{background:#2095f0;text-decoration:none;color:#fff!important}#at_hover.atm-s .at_bold{font-weight:700}#at_hover.atm-s a:hover .at_bold{color:#fff!important}.atm-s a .at-label{vertical-align:middle;margin-left:5px;direction:ltr}.at_PinItButton{display:block;width:40px;height:20px;padding:0;margin:0;background-image:url(//s7.addthis.com/static/t00/pinit00.png);background-repeat:no-repeat}.at_PinItButton:hover{background-position:0 -20px}.addthis_toolbox .addthis_button_pinterest_pinit{position:relative}.at-share-tbx-element .fb_iframe_widget span{vertical-align:baseline!important}#at16pf{height:auto;text-align:right;padding:4px 8px}.at-privacy-info{position:absolute;left:7px;bottom:7px;cursor:pointer;text-decoration:none;font-family:helvetica,arial,sans-serif;font-size:10px;line-height:9pt;letter-spacing:.2px;color:#666}.at-privacy-info:hover{color:#000}.body .wsb-social-share .wsb-social-share-button-vert{padding-top:0;padding-bottom:0}.body .wsb-social-share.addthis_counter_style .addthis_button_tweet.wsb-social-share-button{padding-top:40px}.body .wsb-social-share.addthis_counter_style .addthis_button_google_plusone.wsb-social-share-button{padding-top:0}.body .wsb-social-share.addthis_counter_style .addthis_button_facebook_like.wsb-social-share-button{padding-top:21px}@media print{#at4-follow,#at4-share,#at4-thankyou,#at4-whatsnext,#at4m-mobile,#at15s,.at4,.at4-recommended{display:none!important}}@media screen and (max-width:400px){.at4win{width:100%}}@media screen and (max-height:700px) and (max-width:400px){.at4-thankyou-inner .at4-recommended-container{height:122px;overflow:hidden}.at4-thankyou-inner .at4-recommended .at4-recommended-item:first-child{border-bottom:1px solid #c5c5c5}}</style><style type="text/css">.at-branding-logo{font-family:helvetica,arial,sans-serif;text-decoration:none;font-size:10px;display:inline-block;margin:2px 0;letter-spacing:.2px}.at-branding-logo .at-branding-icon{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAMAAAC67D+PAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRF////+GlNUkcc1QAAAB1JREFUeNpiYIQDBjQmAwMmkwEM0JnY1WIxFyDAABGeAFEudiZsAAAAAElFTkSuQmCC")}.at-branding-logo .at-branding-icon,.at-branding-logo .at-privacy-icon{display:inline-block;height:10px;width:10px;margin-left:4px;margin-right:3px;margin-bottom:-1px;background-repeat:no-repeat}.at-branding-logo .at-privacy-icon{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAKCAMAAABR24SMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABhQTFRF8fr9ot/xXcfn2/P5AKva////////AKTWodjhjAAAAAd0Uk5T////////ABpLA0YAAAA6SURBVHjaJMzBDQAwCAJAQaj7b9xifV0kUKJ9ciWxlzWEWI5gMF65KUTv0VKkjVeTerqE/x7+9BVgAEXbAWI8QDcfAAAAAElFTkSuQmCC")}.at-branding-logo span{text-decoration:none}.at-branding-logo .at-branding-addthis,.at-branding-logo .at-branding-powered-by{color:#666}.at-branding-logo .at-branding-addthis:hover{color:#333}.at-cv-with-image .at-branding-addthis,.at-cv-with-image .at-branding-addthis:hover{color:#fff}a.at-branding-logo:visited{color:initial}.at-branding-info{display:inline-block;padding:0 5px;color:#666;border:1px solid #666;border-radius:50%;font-size:10px;line-height:9pt;opacity:.7;transition:all .3s ease;text-decoration:none}.at-branding-info span{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.at-branding-info:before{content:'i';font-family:Times New Roman}.at-branding-info:hover{color:#0780df;border-color:#0780df}</style><script src="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/s-code-contents-eec3acdbba5249646292a8d53ad84a07cef3e1cf.js.download"></script><style id="fit-vids-style">.fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}</style><style type="text/css"></style></head><body class="r"><div class="wrapper">
+
+<div id="rContent" class="articleProduct content clearfix">
+<p class="crumb">
+            <a href="http://www.informit.com/">Home</a>
+            &gt;
+            <a href="http://www.informit.com/articles/index.aspx">Articles</a>
+            &gt;
+            <a href="http://www.informit.com/articles/index.aspx?st=60206">Programming</a>
+            &gt;
+            <a href="http://www.informit.com/articles/index.aspx?st=60205">User Interface (UI)</a>
+</p>
+    <div id="columnOne" class="ten columns alpha rFull">
+        <div id="articleContent" class="clearfix">
+            <div id="articleHeader" class="clearfix">
+                    <h1><a href="http://www.informit.com/articles/article.aspx?p=1189080">Introduce Animated Cursors to Java GUIs, Part 2</a></h1>
+                <a rel="author" href="http://www.informit.com/authors/bio/38e79a1e-5358-4f08-bf60-ed3dd1614e0d"><img src="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/friesen_jeff_e.jpg" alt="Jeff Friesen" class="author"></a>                <ul class="list-article-author">
+                        <li class="authorName"> By <a rel="author" href="http://www.informit.com/authors/bio/38e79a1e-5358-4f08-bf60-ed3dd1614e0d">Jeff Friesen</a></li>
+                    <li>Apr 18, 2008</li>
+                </ul>
+            </div>
+            <div class="articleTools clearfix box">
+                    <div id="articleTOC">
+                        <p>
+                            <a href="http://www.informit.com/articles/article.aspx?p=1189080&amp;seqNum=2#" class="TOC"><span class="ss-icon">📄</span> <span class="linkText">Contents</span></a>
+                        </p>
+                        <div id="articleTOCList" class="TOCcontent">
+                            <a class="tocClose ss-icon" href="http://www.informit.com/articles/article.aspx?p=1189080&amp;seqNum=2#">␡</a>                        
+                            <ol>
+                                            <li>
+                                                <a href="http://www.informit.com/articles/article.aspx?p=1189080">The Resource Interchange File Format (RIFF)</a>
+                                            </li>
+                                            <li class="currentPageInfo">
+                                                Exploring the ca.mb.javajeff.riff Package
+                                            </li>
+                                            <li>
+                                                <a href="http://www.informit.com/articles/article.aspx?p=1189080&amp;seqNum=3">The ANI Format</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://www.informit.com/articles/article.aspx?p=1189080&amp;seqNum=4">Inside the Animated Cursor Library, Part 2</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://www.informit.com/articles/article.aspx?p=1189080&amp;seqNum=5">Conclusion</a>
+                                            </li>
+                            </ol>                            
+                        </div>
+                    </div>
+                <div class="articleInteraction">
+                    <ul>
+                        <li>
+                            <a href="http://www.informit.com/articles/printerfriendly/1189080" title="Print"><span class="ss-icon">⎙</span> <span class="linkText">Print</span></a>
+                        </li>
+                        <li>
+
+<script type="text/javascript">
+    addthis_pub = 'informit';
+    addthis_logo = 'http://www.informit.com/display/InformIT/images/header/informit.png';
+    addthis_logo_background = '596770';
+    addthis_logo_color = '596770';
+    addthis_brand = 'informIT';
+    addthis_options = 'email, delicious, digg, facebook, google, newsvine, reddit, slashdot, stumbleupon, technorati, twitter, more';
+</script>
+<a href="http://www.addthis.com/bookmark.php" onmouseover="return addthis_open(this, &#39;&#39;, &#39;[URL]&#39;, &#39;[TITLE]&#39;)" onmouseout="addthis_close()" onclick="return addthis_sendto()"><span class="ss-icon">+</span> <span class="linkText">Share This</span></a>
+<script type="text/javascript" src="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/addthis_widget.js.download"></script>
+                        </li>
+                    </ul>
+                </div>
+                    <div class="pagination">
+            <a class="paginationPrevious" href="http://www.informit.com/articles/article.aspx?p=1189080">&lt;<span class="pagination-nodisplay"> Back</span></a>
+        <span class="paginationLocation"><span class="pagination-bold">Page 2</span><span class="pagination-nodisplay"> of 5</span></span>
+            <a class="paginationNext" href="http://www.informit.com/articles/article.aspx?p=1189080&amp;seqNum=3"><span class="pagination-nodisplay">Next </span>&gt;</a>
+    </div>
+                
+            </div> <!-- end articletools -->
+            <div id="articleText">
+
+                    <a class="relatedBookLink" href="http://www.informit.com/articles/article.aspx?p=1189080&amp;seqNum=2#" style="display: inline;">Like this article? We recommend <span class="ss-icon"></span></a>
+                    <div class="relatedBook relatedBookWide">
+                        <div class="header">
+                            <h3>Like this article? We recommend</h3>
+                        </div>
+                        <div class="productArea clearfix">
+                            <a href="http://www.informit.com/store/filthy-rich-clients-developing-animated-and-graphical-9780132413930?w_ptgrevartcl=Introduce+Animated+Cursors+to+Java+GUIs%2c+Part+2_1189080"><img src="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/ShowCover.aspx" alt="Filthy Rich Clients: Developing Animated and Graphical Effects for Desktop Java¿ Applications" class="product"></a><a href="http://www.informit.com/store/filthy-rich-clients-developing-animated-and-graphical-9780132413930?w_ptgrevartcl=Introduce+Animated+Cursors+to+Java+GUIs%2c+Part+2_1189080" class="title">Filthy Rich Clients: Developing Animated and Graphical Effects for Desktop Java¿ Applications</a>
+                            <br>
+                            <br>
+                            <a href="http://www.informit.com/store/filthy-rich-clients-developing-animated-and-graphical-9780132413930?w_ptgrevartcl=Introduce+Animated+Cursors+to+Java+GUIs%2c+Part+2_1189080" class="button">Learn More</a>
+                                <a href="http://www.informit.com/buy.aspx?isbn=9780132413930&amp;w_ptgrevartcl=Introduce+Animated+Cursors+to+Java+GUIs%2c+Part+2_1189080" class="buy button"><span class="ss-icon"></span>Buy</a>
+                        </div>
+                    </div>
+                    <div class="relatedBook slide" style="display: block;">
+                        <div class="header graydient">
+                            <h3 class="relatedHide">Like this article? We recommend</h3>
+                            <h3 class="relatedShow"><a href="http://www.informit.com/articles/article.aspx?p=1189080&amp;seqNum=2#" class="mobileClose">Like this article? We recommend <span class="ss-icon"></span></a></h3>
+                        </div>
+                        <div class="productArea graydient clearfix">
+                            <a href="http://www.informit.com/store/filthy-rich-clients-developing-animated-and-graphical-9780132413930?w_ptgrevartcl=Introduce+Animated+Cursors+to+Java+GUIs%2c+Part+2_1189080"><img src="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/ShowCover.aspx" alt="Filthy Rich Clients: Developing Animated and Graphical Effects for Desktop Java¿ Applications" class="product"></a><a href="http://www.informit.com/store/filthy-rich-clients-developing-animated-and-graphical-9780132413930?w_ptgrevartcl=Introduce+Animated+Cursors+to+Java+GUIs%2c+Part+2_1189080" class="title">Filthy Rich Clients: Developing Animated and Graphical Effects for Desktop Java¿ Applications</a>
+                            <br>
+                            <br>
+                            <a href="http://www.informit.com/store/filthy-rich-clients-developing-animated-and-graphical-9780132413930?w_ptgrevartcl=Introduce+Animated+Cursors+to+Java+GUIs%2c+Part+2_1189080" class="button">Learn More</a>
+                                <a href="http://www.informit.com/buy.aspx?isbn=9780132413930&amp;w_ptgrevartcl=Introduce+Animated+Cursors+to+Java+GUIs%2c+Part+2_1189080" class="buy button"><span class="ss-icon"></span>Buy</a>
+                        </div>
+                    </div>
+
+                <h2>Exploring the <tt>ca.mb.javajeff.riff</tt> Package</h2>
+<p>To simplify the tasks of navigating through and extracting data from
+RIFF-based <tt>.ani</tt> files, I’ve created a
+<tt>ca.mb.javajeff.riff</tt> package containing <tt>RIFF</tt>, <tt>Chunk</tt>,
+and <tt>BadRIFFException</tt> classes. The <tt>RIFF</tt> class, which only
+recognizes RIFF files with <tt>RIFF</tt> parent chunks, presents four
+constructors and three non-constructor methods:</p>
+<ul>
+<li><tt>public RIFF(File <em>file</em>)</tt> opens an input stream to the RIFF
+file identified by its <tt>File</tt> argument, reads the first chunk’s
+header, verifies that this chunk is <tt>RIFF</tt>, and reads the <tt>RIFF</tt>
+chunk’s form type. This constructor throws <tt>IOException</tt> for a file
+I/O problem; it throws <tt>BadRIFFException</tt> if no valid <tt>RIFF</tt> chunk
+is found.</li>
+<li><tt>public RIFF(InputStream <em>is</em>)</tt> reads the first chunk’s
+header from the already open input stream identified by its <tt>InputStream</tt>
+argument, verifies that this chunk is <tt>RIFF</tt>, and reads the <tt>RIFF</tt>
+chunk’s form type. This constructor throws the same exceptions as the
+previous constructor.</li>
+<li><tt>public RIFF(String <em>filename</em>)</tt> opens an input stream to the
+RIFF file identified by its <tt>String</tt> argument, reads the first
+chunk’s header, verifies that this chunk is <tt>RIFF</tt>, and reads the
+<tt>RIFF</tt> chunk’s form type. This constructor throws the same
+exceptions as the previous constructors.</li>
+<li><tt>public RIFF(URL <em>url</em>)</tt> opens an input stream to the RIFF
+file identified by its <tt>URL</tt> argument, reads the first chunk’s
+header, verifies that this chunk is <tt>RIFF</tt>, and reads the <tt>RIFF</tt>
+chunk’s form type. This constructor throws the same exceptions as the
+previous constructors.</li>
+<li><tt>public void close()</tt> closes the currently open input stream. You
+must call this method after you finish reading chunks. You don’t need to
+call <tt>close()</tt> when a constructor throws an exception. This method throws
+no exceptions.</li>
+<li><tt>public Chunk getChunk()</tt> returns the next chunk (starting with the
+first chunk inside the <tt>RIFF</tt> chunk) from the input stream. If there are
+no more chunks, <tt>getChunk()</tt> returns null. This method throws the same
+exceptions as the constructors.</li>
+<li><tt>public String getFormType()</tt> returns the <tt>RIFF</tt> chunk’s
+form type as a four-character string.</li>
+</ul>
+<p>There is a problem with part 1’s implementation of the <tt>RIFF</tt>
+constructors listed above. Because part 1’s constructors assume that RIFF
+files strictly follow the RIFF specification, the constructors don’t
+verify that a RIFF file’s <tt>RIFF</tt> chunk header size field contains a
+value that’s eight bytes less than the RIFF file’s size—the
+eight bytes account for the header’s four-byte ID and size fields.</p>
+<p>Because this check isn’t performed, the <tt>RIFF</tt> instance’s
+starting "bytes left to read" tally isn’t properly initialized
+for RIFF files where the header’s size field equals the file size. This
+incorrect tally value results in <tt>getChunk()</tt> eventually throwing a
+<tt>BadRIFFException</tt> rather than returning null when it reaches the end of
+the file.</p>
+<p>The constructors in this article’s <tt>RIFF</tt> class address this
+problem by keeping track of the number of bytes read and comparing this value to
+the header’s size field each time <tt>getChunk()</tt> is called. This
+method returns null if the number of bytes read equals the header size value
+plus eight. It also returns null if the header size value incorrectly equals
+just the header size.</p>
+<p>The <tt>getChunk()</tt> method returns a chunk as an instance of the
+<tt>Chunk</tt> class. This class is described in Listing 2.</p>
+<h4>Listing 2&nbsp;<tt>Chunk.java</tt>.</h4>
+<pre>// Chunk.java
+
+package ca.mb.javajeff.riff;
+
+public class Chunk
+{
+  public String name;
+  public long size;
+  public byte [] data;
+}</pre>
+<p><tt>Chunk</tt>’s <tt>name</tt> and <tt>size</tt> fields contain the
+values that are located in a chunk header. For non-<tt>LIST</tt> chunks, the
+<tt>data</tt> field contains the entire contents of the chunk’s data
+area—the length of this byte array equals the value in the <tt>size</tt>
+field. For <tt>LIST</tt> chunks, <tt>data</tt> contains only the four-byte list
+type.</p>
+<p>The final class in the <tt>ca.mb.javajeff.riff</tt> package is
+<tt>BadRIFFException</tt>. Listing 3 describes this class.</p>
+<h4>Listing 3&nbsp;<tt>BadRIFFException.java</tt>.</h4>
+<pre>// BadRIFFException.java
+
+package ca.mb.javajeff.riff;
+
+public class BadRIFFException extends Exception
+{
+  public BadRIFFException (String message)
+  {
+   super (message);
+  }
+}</pre>
+<p><tt>BadRIFFException</tt> is simpler than <tt>BadAniException</tt> (see part
+1 for the source code for this class) because it doesn’t require a
+constructor to wrap exceptions. <tt>BadAniException</tt> includes a constructor
+to wrap exceptions to minimize coupling between an application and the animation
+library’s support infrastructure—an application only imports a
+support package to access the wrapped exception.</p>
+
+            </div>
+            <div class="articleTools clearfix box">
+                    <div class="pagination">
+            <a class="paginationPrevious" href="http://www.informit.com/articles/article.aspx?p=1189080">&lt;<span class="pagination-nodisplay"> Back</span></a>
+        <span class="paginationLocation"><span class="pagination-bold">Page 2</span><span class="pagination-nodisplay"> of 5</span></span>
+            <a class="paginationNext" href="http://www.informit.com/articles/article.aspx?p=1189080&amp;seqNum=3"><span class="pagination-nodisplay">Next </span>&gt;</a>
+    </div>
+
+                <div class="articleInteraction">
+                    <ul>
+                        <li>
+
+<script type="text/javascript">
+    addthis_pub = 'informit';
+    addthis_logo = 'http://www.informit.com/display/InformIT/images/header/informit.png';
+    addthis_logo_background = '596770';
+    addthis_logo_color = '596770';
+    addthis_brand = 'informIT';
+    addthis_options = 'email, delicious, digg, facebook, google, newsvine, reddit, slashdot, stumbleupon, technorati, twitter, more';
+</script>
+<a href="http://www.addthis.com/bookmark.php" onmouseover="return addthis_open(this, &#39;&#39;, &#39;[URL]&#39;, &#39;[TITLE]&#39;)" onmouseout="addthis_close()" onclick="return addthis_sendto()"><span class="ss-icon">+</span> <span class="linkText">Share This</span></a>
+<script type="text/javascript" src="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/addthis_widget.js.download"></script>
+                        </li>
+                        <li class="last">
+                            <a href="http://www.informit.com/articles/article.aspx?p=1189080&amp;seqNum=2#addToWishList" class="jsLoadFrame dialogOpener"><span class="ss-icon">🔖</span> <span class="linkText">Save To Your Account</span></a>               
+                        </li>
+                    </ul>
+                      
+                </div> 
+            </div>
+        </div>
+    </div>
+    <div id="columnTwo" class="six columns omega rFull">
+<div id="promotions" class="tabwidget prop">
+	<h3>Related Resources</h3>
+	<ul class="tabs clearfix">
+		<li class="selected"><a href="http://www.informit.com/articles/article.aspx?p=1189080&amp;seqNum=2#" onclick="tabWidget(1,&#39;promotions&#39;); return false;">Store</a></li>
+		<li><a href="http://www.informit.com/articles/article.aspx?p=1189080&amp;seqNum=2#" onclick="tabWidget(2,&#39;promotions&#39;); loadWidget(&#39;promotions&#39;, 1, &#39;/Related/Articles/1189080?stateIntId=60205&#39;); return false;">Articles</a></li>
+		<li><a href="http://www.informit.com/articles/article.aspx?p=1189080&amp;seqNum=2#" onclick="tabWidget(3,&#39;promotions&#39;); loadWidget(&#39;promotions&#39;, 2, &#39;/Related/Blogs/606199?stateIntId=60205&#39;); return false;">Blogs</a></li>
+	</ul>
+	<div class="container on">
+
+    <div class="buckets-image-51 cf">
+        <div class="productCover">
+            <a href="http://www.informit.com/store/core-java-se-9-for-the-impatient-9780134694726?w_ptgrevartcl=Core+Java+SE+9+for+the+Impatient_2752810">
+                <img src="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/ShowCover(1).aspx" alt="Core Java SE 9 for the Impatient" class="product">
+            </a>
+        </div>
+
+        <ul class="buckets-list left">
+            <li class="buckets-list-title">
+                <a href="http://www.informit.com/store/core-java-se-9-for-the-impatient-9780134694726" class="title">
+                    Core Java SE 9 for the Impatient, 2nd Edition
+                </a>
+            </li>
+            <li class="buckets-image-51-author">By <a href="http://www.informit.com/authors/bio/a858b29e-e9c7-4f02-91de-997865d37da0">Cay S. Horstmann</a></li>
+            <li class="buckets-image-51-price">Book $39.99</li>
+        </ul>
+    </div><!--buckets-image-51 -->
+    <div class="buckets-image-51 cf">
+        <div class="productCover">
+            <a href="http://www.informit.com/store/java-in-24-hours-sams-teach-yourself-covering-java-9780672337949?w_ptgrevartcl=Java+in+24+Hours%2c+Sams+Teach+Yourself+(Covering+Java+9)_2523777">
+                <img src="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/ShowCover(2).aspx" alt="Java in 24 Hours, Sams Teach Yourself (Covering Java 9)" class="product">
+            </a>
+        </div>
+
+        <ul class="buckets-list left">
+            <li class="buckets-list-title">
+                <a href="http://www.informit.com/store/java-in-24-hours-sams-teach-yourself-covering-java-9780672337949" class="title">
+                    Java in 24 Hours, Sams Teach Yourself (Covering Java 9), 8th Edition
+                </a>
+            </li>
+            <li class="buckets-image-51-author">By <a href="http://www.informit.com/authors/bio/cd56b63e-67e7-41a1-a0d9-a21fef245306">Rogers Cadenhead</a></li>
+            <li class="buckets-image-51-price">Book $27.99</li>
+        </ul>
+    </div><!--buckets-image-51 -->
+    <div class="buckets-image-51 cf">
+        <div class="productCover">
+            <a href="http://www.informit.com/store/introduction-to-java-programming-brief-version-plus-9780134694504?w_ptgrevartcl=Introduction+to+Java+Programming%2c+Brief+Version+Plus+MyProgrammingLab+with+Pearson+eText+--+Access+Card+Package_2740782">
+                <img src="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/ShowCover(3).aspx" alt="Introduction to Java Programming, Brief Version Plus MyProgrammingLab with Pearson eText -- Access Card Package" class="product">
+            </a>
+        </div>
+
+        <ul class="buckets-list left">
+            <li class="buckets-list-title">
+                <a href="http://www.informit.com/store/introduction-to-java-programming-brief-version-plus-9780134694504" class="title">
+                    Introduction to Java Programming, Brief Version Plus MyProgrammingLab with Pearson eText -- Access Card Package, 11th Edition
+                </a>
+            </li>
+            <li class="buckets-image-51-author">By <a href="http://www.informit.com/authors/bio/6b349709-0d34-47bd-9d3b-f6264038fede">Y. Daniel Liang</a></li>
+            <li class="buckets-image-51-price">Book $142.23</li>
+        </ul>
+    </div><!--buckets-image-51 -->
+    <p class="buckets-see-all">
+        <a href="http://www.informit.com/store/index.aspx?st=60205">See All Related Store Items</a>
+    </p>
+
+	</div>
+	<div class="container"></div>
+	<div class="container"></div>
+	<div class="container"></div>
+</div>
+        
+        
+    </div>
+
+    <script type="text/javascript" src="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/waypoints.min.js.download"></script>
+    <script type="text/javascript" src="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/jquery.fitvids.min.js.download"></script>
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function() {    
+            $('#articleText').fitVids();
+            if (document.documentElement.clientWidth > 960) {
+                $('#rContent').waypoint(function() {
+                    $('.relatedBook.slide').slideToggle();
+                    $('.relatedBookLink').slideToggle();
+                }, { offset: -300 }); 
+            } else {
+                console.log('narrow');
+                $('#rContent').waypoint(function() {
+                    $('.relatedBook.slide').slideToggle();
+                    $('.relatedBookLink').slideToggle();
+                }, { offset: -10 }); 
+
+                $('#articleContent').waypoint(function() {
+                    $('.relatedBook.slide').slideToggle();
+                    $('.relatedBookLink').slideToggle();
+                }, { offset: 'bottom-in-view' }); 
+            }
+                          
+            $('.relatedBookLink').on('click touchstart', function() {
+                $('.relatedBookLink').toggleClass('active');
+                $('.relatedBook.slide').toggleClass('active');
+                return false;              
+            });
+            $('.mobileClose').on('click touchstart', function() {
+                $('.relatedBookLink').toggleClass('active');
+                $('.relatedBook.slide').toggleClass('active');
+                return false;              
+            }); 
+            if (!$('.sidebar').children().is('.title, .theholder')) {
+                $('.sidebar').css('padding', '2em 1em 1em 1em');
+            }              
+        });
+    </script>
+</div><div id="header"><div class="cranium"><div class="branding"><div id="hLogo"><a href="http://www.informit.com/" accesskey="0" title="Home" class="logo"><!--[if lte IE 8]><img src="/display/informIT/images/header/informit.png" alt="InformIT" /><![endif]--></a></div></div><div class="tagline">the trusted technology learning source</div><a href="http://www.informit.com/articles/article.aspx?p=1189080&amp;seqNum=2#menu" class="menu-link ss-icon"></a><div id="headerLinks" class="clearfix">
+                   
+    <div id="cartLink" class="headerLink c">
+        <span class="bighead ss-icon"></span>
+        <a href="https://memberservices.informit.com/cart/buy.aspx?partner=53">
+            <span class="bighead">View </span>Your Cart
+        </a>
+    </div>
+
+    <div class="hi">
+            <a href="https://memberservices.informit.com/my_account/register.aspx?partner=53">Join</a><span>|</span><a href="https://memberservices.informit.com/my_account/login.aspx?partner=53">Sign In</a>
+    </div>
+
+              <form name="headersearchform" id="headersearchform" class="s" method="GET" action="http://www.informit.com/search/index.aspx" xmlns:msxsl="urn:schemas-microsoft-com:xslt"><label for="headersearchform">Search</label><input onfocus="checkClear(this,&#39;Search&#39;);" type="text" name="query" id="query" value="Search"><input type="submit" id="searchbutton" class="ss-icon" value="🔎"></form></div></div></div><div id="siteNav"><div class="cranium clearfix"><ul id="nav"><li class="mobile search"><form name="headersearchform" id="headersearchform" class="s" method="GET" action="http://www.informit.com/search/index.aspx" xmlns:msxsl="urn:schemas-microsoft-com:xslt"><label for="headersearchform">Search</label><input onfocus="checkClear(this,&#39;Search&#39;);" type="text" name="query" id="query" value="Search"><input type="submit" id="searchbutton" class="ss-icon" value="🔎"></form></li>
+                
+    <li class="mobile">
+        <a href="https://memberservices.informit.com/cart/buy.aspx?partner=53">
+            <span class="ss-icon cart"> </span> View Your Cart
+        </a>
+    </li>
+
+    <li class="mobile">
+        <a href="https://memberservices.informit.com/my_account/login.aspx?partner=53">
+            <span class="ss-icon">👤</span> Sign In
+        </a>
+    </li>
+    <li class="mobile">
+        <a href="https://memberservices.informit.com/my_account/register.aspx?partner=53">Join</a>
+    </li>
+
+              <li><a class="arrow" href="http://www.informit.com/store/">Store</a><ul class="column1 sib" style="min-height: 288px;"><li><a href="http://www.informit.com/store/index.aspx?st=66374">
+                        Business &amp; Management
+                      </a></li><li><a href="http://www.informit.com/store/index.aspx?st=60403">Certification</a></li><li><a href="http://www.informit.com/store/index.aspx?st=98435">
+                        Cloud Computing &amp; Virtualization
+                      </a></li><li><a href="http://www.informit.com/store/index.aspx?st=60406">Data</a></li><li><a href="http://www.informit.com/store/index.aspx?st=99185">Digital Photography</a></li><li><a href="http://www.informit.com/store/index.aspx?st=60390">Engineering</a></li><li><a href="http://www.informit.com/store/index.aspx?st=60380">
+                        Graphics &amp; Web Design
+                      </a></li><li><a href="http://www.informit.com/store/index.aspx?st=60356">
+                        Home &amp; Office Computing
+                      </a></li><li><a href="http://www.informit.com/store/index.aspx?st=60367">Information Technology</a></li></ul><ul class="column2 sib" style="min-height: 288px;"><li><a href="http://www.informit.com/store/index.aspx?st=98412">
+                        Mobile Application Development &amp; Programming
+                      </a></li><li><a href="http://www.informit.com/store/index.aspx?st=60382">Networking</a></li><li><a href="http://www.informit.com/store/index.aspx?st=67290">Open Source</a></li><li><a href="http://www.informit.com/store/index.aspx?st=60428">Operating Systems, Server</a></li><li><a href="http://www.informit.com/store/index.aspx?st=60370">Programming</a></li><li><a href="http://www.informit.com/store/index.aspx?st=60408">Security</a></li><li><a href="http://www.informit.com/store/index.aspx?st=66379">
+                        Software Development &amp; Management
+                      </a></li><li><a href="http://www.informit.com/store/index.aspx?st=66380">Web Development</a></li><li><a href="http://www.informit.com/store/index.aspx?st=60379">Web Services</a></li></ul></li><li><a class="arrow" href="http://www.informit.com/formats/">Formats</a><ul><li><a href="http://www.informit.com/store/browse/books">Books</a></li><li><a href="http://www.informit.com/store/browse/ebooks">eBooks</a></li><li><a href="http://www.informit.com/store/browse/practice-tests">Practice Tests</a></li><li><a href="http://www.informit.com/store/browse/software">Software</a></li><li><a href="http://www.informit.com/store/browse/video">Video</a></li><li><a href="http://www.informit.com/store/browse/web-editions">Web Editions</a></li></ul></li><li><a href="http://www.informit.com/promotions/">Deals &amp; Promotions</a></li><li><a href="http://www.informit.com/promotions/video-training-for-it-pros-developers-sys-admins-devops-140499">Video Training</a></li><li><a href="https://www.safaribooksonline.com/?utm_source=informit&amp;utm_medium=referral&amp;utm_campaign=publisher&amp;utm_content=global+top+nav">Safari</a></li><li><a class="arrow" href="http://www.informit.com/imprint/">Imprints</a><ul class="imprints"><li><a href="http://www.informit.com/imprint/index.aspx?st=61085">Addison-Wesley Professional</a></li><li><a href="http://www.adobepress.com/">Adobe Press</a></li><li><a href="http://www.ciscopress.com/">Cisco Press</a></li><li><a href="http://www.informit.com/promotions/pearson-ft-press-141135">FT Press</a></li><li><a href="http://www.informit.com/promotions/ibm-press-141142">IBM Press</a></li><li><a href="https://www.microsoftpressstore.com/">Microsoft Press Store</a></li><li><a href="http://www.peachpit.com/">Peachpit</a></li><li><a href="http://www.pearsonitcertification.com/">Pearson IT Certification</a></li><li><a href="http://www.informit.com/imprint/index.aspx?st=61089">Prentice Hall Professional</a></li><li><a href="http://www.quepublishing.com/">Que Publishing</a></li><li><a href="http://www.informit.com/imprint/index.aspx?st=61091">Sams Publishing</a></li><li><a href="http://www.pearsonitcertification.com/promotions/vmware-press-138356">VMware Press</a></li></ul></li><li><a class="arrow" href="http://www.informit.com/explore/">Explore</a><ul class="last"><li><a href="http://www.informit.com/about/">About</a></li><li><a href="http://www.informit.com/affiliates/">Affiliate Program</a></li><li><a href="http://www.informit.com/authors/">Authors</a></li><li><a href="http://www.informit.com/articles/">Chapters &amp; Articles</a></li><li><a href="http://www.informit.com/about/contact_us/">Contact Us</a></li><li><a href="http://www.informit.com/promotions/">Deals &amp; Promotions</a></li><li><a href="http://www.informit.com/promotions/resource-center-directory-140876">Popular Topics</a></li><li><a href="http://www.informit.com/store/register.aspx">Product Registration</a></li><li><a href="http://www.informit.com/newsletters/">Special Offers &amp; Newsletter</a></li><li><a href="http://www.informit.com/promotions/video-training-for-it-pros-developers-sys-admins-devops-140499">Video Training</a></li></ul></li><li><a class="arrow" href="http://www.informit.com/promotions/informits-community-resource-center-139745">Community</a><ul class="last"><li><a href="http://www.informit.com/press/">Press and Media Relations</a></li><li><a href="http://www.informit.com/promotions/share-your-knowledge-and-become-a-community-reviewer-140471">Product Review Team</a></li><li><a href="http://www.informit.com/user_groups/">User Groups</a></li></ul></li></ul></div></div><div id="footer"><ul class="links"><li><a href="http://www.informit.com/about/">About</a></li><li><a href="http://www.informit.com/affiliates/">Affiliates</a></li><li><a href="http://www.informit.com/about/contact_us/">Contact Us</a></li><li><a href="http://www.informit.com/about/jobs.aspx">Jobs</a></li><li><a href="http://www.informit.com/about/legal.aspx">Legal Notice</a></li><li><a href="http://www.informit.com/about/privacy.aspx">Privacy Policy</a></li><li><a href="http://www.informit.com/press/">Press</a></li><li><a href="http://www.informit.com/promotions/">Promotions</a></li><li><a href="http://www.informit.com/site_map/">Site Map</a></li><li><a href="http://www.informit.com/about/write_for_us.aspx">Write for Us</a></li></ul><div itemscope="itemscope" itemtype="http://schema.org/Corporation">
+          ©  2017 Pearson Education, <span itemprop="name">Informit</span>. All rights reserved.<br><div itemprop="address" itemscope="itemscope" itemtype="http://schema.org/PostalAddress"><span itemprop="streetAddress">800 East 96th Street</span>, <span itemprop="addressLocality">Indianapolis</span>, <span itemprop="addressRegion">Indiana </span><span itemprop="postalCode">46240</span></div></div></div><div id="strap"><div class="cranium"><div id="pearsonTopLogoLink"></div><div id="pearsonAlwaysLearningImage"></div></div></div><!--Google analytics--><script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function()
+        { (i[r].q=i[r].q||[]).push(arguments)}
+        ,i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-433761-6', 'auto', {'allowLinker': true});
+        ga('require', 'linker');
+        
+        ga('linker:autoLink', ['www.informit.com', 'memberservices.informit.com']);
+        ga('send', 'pageview');
+      </script><script type="text/JavaScript" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+            setTimeout(function(){var a=document.createElement("script");
+            var b=document.getElementsByTagName("script")[0];
+            a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0018/4148.js?"+Math.floor(new Date().getTime()/3600000);
+            a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+        </script></div><div id="_atssh" style="visibility: hidden; height: 1px; width: 1px; position: absolute; top: -9999px; z-index: 100000;"><iframe id="_atssh36" title="AddThis utility frame" style="height: 1px; width: 1px; position: absolute; top: 0px; z-index: 100000; border: 0px; left: 0px;" src="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/sh.7a295a410262af12dfaaa96a.html"></iframe></div><style id="service-icons-0"></style><script type="text/javascript" xmlns:msxsl="urn:schemas-microsoft-com:xslt">_satellite.pageBottom();</script>
+<div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-front ui-draggable" tabindex="-1" role="dialog" aria-describedby="addToWishList" aria-labelledby="ui-id-1" style="display: none;"><div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"><span id="ui-id-1" class="ui-dialog-title">Save To My Account</span><button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-dialog-titlebar-close" role="button" aria-disabled="false" title="close"><span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span><span class="ui-button-text">close</span></button></div><div id="addToWishList" class="dialogBox ui-dialog-content ui-widget-content">
+                         <iframe id="wishListSrc" src="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/addTo.html"></iframe>
+                    </div></div><iframe name="yie-js" style="display: none;" src="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/saved_resource.html"></iframe><iframe src="./Exploring the ca.mb.javajeff.riff Package _ Introduce Animated Cursors to Java GUIs, Part 2 _ InformIT_files/main.html" name="yie-sandbox" style="display: none;"></iframe></body></html>

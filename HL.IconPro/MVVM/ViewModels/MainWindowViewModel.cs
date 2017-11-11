@@ -178,6 +178,17 @@ namespace HL.IconPro.MVVM.ViewModels
             decoder = null;
             if (_Frames?.Count > 0) SelectedFrame = _Frames[0];
         }
+        public void OpenAnimatedCursor(System.IO.Stream Source)
+        {
+            var decoder = new IconPro.Lib.Wpf.Motion.AnimatedCursorBitmapDecoder();
+            decoder.Open(Source);
+            foreach (BitmapFrame bp in decoder.Frames)
+            {
+                _Frames.AddWithoutSort(new Models.IconFrameModel(bp, bp.Decoder));
+            }
+            decoder = null;
+            if (_Frames?.Count > 0) SelectedFrame = _Frames[0];
+        }
         protected override void OnPropertyChanged(string Name)
         {
             base.OnPropertyChanged(Name);

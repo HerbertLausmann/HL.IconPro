@@ -186,15 +186,18 @@ namespace HL.IconPro.MVVM.ViewModels
                 return GetCommand("Open", new Command(new Action<object>((object parameter) =>
                     {
                         Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
-                        dialog.Filter = "Icon/Cursor(*.ico, *.cur)|*.ico;*.cur";
+                        dialog.Filter = "Icon/Cursor(*.ico, *.cur, *.ani)|*.ico;*.cur;*.ani";
                         dialog.CheckFileExists = true;
                         if (dialog.ShowDialog() == false) return;
                         MainWindowViewModel mwvm = new MainWindowViewModel();
                         System.IO.FileStream fs = new System.IO.FileStream(dialog.FileName, System.IO.FileMode.Open);
                         if (dialog.FileName.ToLower().EndsWith(".ico"))
                             mwvm.OpenIcon(fs);
-                        else
+                        else if (dialog.FileName.ToLower().EndsWith(".cur"))
                             mwvm.OpenCursor(fs);
+                        else if (dialog.FileName.ToLower().EndsWith(".ani"))
+                            mwvm.OpenAnimatedCursor(fs);
+                        else return;
                         fs.Close();
                         MainWindow mw = new MainWindow();
                         mw.DataContext = mwvm;

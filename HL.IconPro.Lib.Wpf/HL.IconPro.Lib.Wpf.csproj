@@ -69,6 +69,7 @@
     <Compile Include="IconBitmapDecoder.cs" />
     <Compile Include="IconBitmapEncoder.cs" />
     <Compile Include="BitmapFrameCollectio.cs" />
+    <Compile Include="Motion\AnimatedCursorBitmapDecoder.cs" />
     <Compile Include="Tools\PEIconExtractor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
