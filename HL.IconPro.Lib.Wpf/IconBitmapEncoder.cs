@@ -21,7 +21,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using HL.IconPro.Lib.Core.DIB;
 using HL.IconPro.Lib.Core;
 
 namespace HL.IconPro.Lib.Wpf
@@ -51,10 +50,29 @@ namespace HL.IconPro.Lib.Wpf
         #region Procedures
         public void Save(System.IO.Stream Output)
         {
-            IconFile IconFile = new IconFile();
+            File IconFile = new File();
+            IconFile.Type = FileType.ICON;
             foreach (BitmapFrame frame in _Frames)
             {
-                IconFrame iconFrame = IconFrame.Create(GetBitmapFrameBuffer(frame, UsePngCompression));
+                Frame iconFrame = Frame.Create(GetImageFrameBuffer(frame, UsePngCompression));
+                if (iconFrame.iconImage != null)
+                {
+                    iconFrame.iconImage.icAND = new byte[0];
+
+                    //This line will generate an AND mask and link it to the XOR bitmap
+                    Helpers.MASK(iconFrame.BitsPerPixel, ref iconFrame.iconImage.icXOR,
+                        ref iconFrame.iconImage.icAND, iconFrame.iconImage.AndStride,
+                        iconFrame.iconImage.XorStride, iconFrame.Width, iconFrame.Height,
+                        iconFrame.iconImage.icColors);
+
+                    //Most all the Windows Icons that I've opened
+                    //had these values setted to 0!
+                    //Actually, I have no ideia about why, but I doing this as well:
+                    iconFrame.iconImage.icHeader.biClrImportant = 0;
+                    iconFrame.iconImage.icHeader.biClrUsed = 0;
+                    iconFrame.iconImage.icHeader.biXPelsPerMeter = 0;
+                    iconFrame.iconImage.icHeader.biYPelsPerMeter = 0;
+                }
                 IconFile.Frames.Add(iconFrame);
             }
             IconFile.Write(Output);

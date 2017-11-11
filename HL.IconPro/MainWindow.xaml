@@ -52,18 +52,18 @@
         <Border BorderBrush="{DynamicResource ButtonBorderBrush}" BorderThickness="0,0,0,1" Height="75.4" VerticalAlignment="Top">
             <Grid HorizontalAlignment="Center" Width="429">
                 <Label Content="FILE" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="10.667"/>
-                <Button Content="HOME" HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Center" Width="75" Command="{Binding HomeCommand, Mode=OneWay}" CommandParameter="{Binding Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"/>
-                <Button Content="SAVE" HorizontalAlignment="Right" Margin="120,0" VerticalAlignment="Center" Width="75" Command="{Binding SaveCommand, Mode=OneWay}" IsEnabled="{Binding CanSave, Mode=OneWay}"/>
-                <Button Content="EXPORT" HorizontalAlignment="Right" Margin="0,0,40,0" VerticalAlignment="Center" Width="75" Command="{Binding ExportCommand, Mode=OneWay}" IsEnabled="{Binding CanExport, Mode=OneWay}" ToolTip="Export all the frames to a folder"/>
-                <Button Content="OPEN" HorizontalAlignment="Left" Margin="120,0,0,0" VerticalAlignment="Center" Width="75" Command="{Binding OpenCommand, Mode=OneWay}"/>
+                <Button Content="HOME" HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Center" Width="75" Command="{Binding HomeCommand, Mode=OneWay}" CommandParameter="{Binding Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}" ToolTip="Go back to the Welcome Window"/>
+                <Button Content="SAVE" HorizontalAlignment="Right" Margin="120,0" VerticalAlignment="Center" Width="75" Command="{Binding SaveCommand, Mode=OneWay}" IsEnabled="{Binding CanSave, Mode=OneWay}" ToolTip="Saves the current works as an icon file"/>
+                <Button Content="EXPORT" HorizontalAlignment="Right" Margin="0,0,40,0" VerticalAlignment="Center" Width="75" Command="{Binding ExportCommand, Mode=OneWay}" IsEnabled="{Binding CanExport, Mode=OneWay}" ToolTip="Export all the frames to a folder" CommandParameter="{Binding Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"/>
+                <Button Content="OPEN" HorizontalAlignment="Left" Margin="120,0,0,0" VerticalAlignment="Center" Width="75" Command="{Binding OpenCommand, Mode=OneWay}" ToolTip="Open an icon file"/>
             </Grid>
         </Border>
         <Border BorderBrush="{DynamicResource ButtonBorderBrush}" BorderThickness="0,1,0,0" Height="75.4" VerticalAlignment="Bottom">
             <Grid HorizontalAlignment="Center" Width="429">
                 <Label Content="FRAME" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10.667"/>
-                <Button Content="DELETE" HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Center" Width="75" Command="{Binding DeleteFrameCommand, Mode=OneWay}" IsEnabled="{Binding CanDeleteFrame, Mode=OneWay}"/>
-                <Button Content="EXPORT" HorizontalAlignment="Right" Margin="0,0,40,0" VerticalAlignment="Center" Width="75" Command="{Binding ExportFrameCommand, Mode=OneWay}" IsEnabled="{Binding CanExportFrame, Mode=OneWay}"/>
-                <Button Content="CREATE" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="75" Command="{Binding CreateFrameCommand, Mode=OneWay}"/>
+                <Button Content="DELETE" HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Center" Width="75" Command="{Binding DeleteFrameCommand, Mode=OneWay}" IsEnabled="{Binding CanDeleteFrame, Mode=OneWay}" ToolTip="Delete the selected frame"/>
+                <Button Content="EXPORT" HorizontalAlignment="Right" Margin="0,0,40,0" VerticalAlignment="Center" Width="75" Command="{Binding ExportFrameCommand, Mode=OneWay}" IsEnabled="{Binding CanExportFrame, Mode=OneWay}" ToolTip="Export the selected frame as a PNG image"/>
+                <Button Content="CREATE" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="75" Command="{Binding CreateFrameCommand, Mode=OneWay}" ToolTip="Create a new frame from a PNG/SVG image"/>
             </Grid>
         </Border>
     </Grid>

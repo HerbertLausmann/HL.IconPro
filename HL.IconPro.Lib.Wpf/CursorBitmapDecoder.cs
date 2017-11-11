@@ -1,5 +1,4 @@
 ﻿using HL.IconPro.Lib.Core;
-using HL.IconPro.Lib.Core.DIB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,61 +13,61 @@ namespace HL.IconPro.Lib.Wpf
     {
         public void Open(System.IO.Stream Source)
         {
-            CursorFile iconFile = CursorFile.FromStream(Source);
-            foreach (Core.CursorFrame cursorFrame in iconFile.Frames)
+            File CursorFile = new File();
+            CursorFile.Read(Source);
+            if (CursorFile.Type != FileType.CURSOR) throw new InvalidOperationException();
+            foreach (Frame CursorFrame in CursorFile.Frames)
             {
-                System.IO.MemoryStream frameStream = new System.IO.MemoryStream(cursorFrame.Buffer);
                 System.Windows.Media.Imaging.BitmapFrame frame = null;
-                if (cursorFrame.Type == Core.FrameType.DIB)
+                if (CursorFrame.type == FrameType.BITMAP)
                 {
-                    DIBitmap dib = DIBitmap.FromStream(frameStream);
-                    if (dib.icHeader.biBitCount == 32)
+                    if (CursorFrame.iconImage.icHeader.biBitCount == 32)
                     {
-                        byte[] pixels = dib.icXOR;
-                        pixels = DIBitmap.FlipYBuffer(pixels, dib.Width, dib.Height, dib.XorStride);
-                        BitmapSource bp = BitmapSource.Create(dib.Width, dib.Height, 96, 96, PixelFormats.Bgra32, null, pixels, dib.XorStride);
+                        byte[] pixels = CursorFrame.iconImage.icXOR;
+                        pixels = Utilities.FlipYBuffer(pixels, CursorFrame.Width, CursorFrame.Height, CursorFrame.iconImage.XorStride);
+                        BitmapSource bp = BitmapSource.Create(CursorFrame.Width, CursorFrame.Height, 96, 96, PixelFormats.Bgra32, null, pixels, CursorFrame.iconImage.XorStride);
                         frame = BitmapFrame.Create(bp);
                     }
-                    else if (dib.icHeader.biBitCount == 24)
+                    else if (CursorFrame.iconImage.icHeader.biBitCount == 24)
                     {
-                        byte[] pixels = dib.icXOR;
-                        pixels = DIBitmap.FlipYBuffer(pixels, dib.Width, dib.Height, dib.XorStride);
-                        BitmapSource bp = BitmapSource.Create(dib.Width, dib.Height, 96, 96, PixelFormats.Bgr24, null, pixels, dib.XorStride);
+                        byte[] pixels = CursorFrame.iconImage.icXOR;
+                        pixels = Utilities.FlipYBuffer(pixels, CursorFrame.Width, CursorFrame.Height, CursorFrame.iconImage.XorStride);
+                        BitmapSource bp = BitmapSource.Create(CursorFrame.Width, CursorFrame.Height, 96, 96, PixelFormats.Bgra32, null, pixels, CursorFrame.iconImage.XorStride);
                         frame = BitmapFrame.Create(bp);
                     }
-                    else if (dib.icHeader.biBitCount == 8)
+                    else if (CursorFrame.iconImage.icHeader.biBitCount == 8)
                     {
-                        byte[] pixels = dib.icXOR;
-                        pixels = DIBitmap.FlipYBuffer(pixels, dib.Width, dib.Height, dib.XorStride);
-                        BitmapSource bp = BitmapSource.Create(dib.Width, dib.Height, 96, 96, PixelFormats.Indexed8, GetPalette(dib.icColors, true), pixels, dib.XorStride);
+                        byte[] pixels = CursorFrame.iconImage.icXOR;
+                        pixels = Utilities.FlipYBuffer(pixels, CursorFrame.Width, CursorFrame.Height, CursorFrame.iconImage.XorStride);
+                        BitmapSource bp = BitmapSource.Create(CursorFrame.Width, CursorFrame.Height, 96, 96, PixelFormats.Indexed8, GetPalette(CursorFrame.iconImage.icColors, true), pixels, CursorFrame.iconImage.XorStride);
                         frame = BitmapFrame.Create(bp);
                     }
-                    else if (dib.icHeader.biBitCount == 4)
+                    else if (CursorFrame.iconImage.icHeader.biBitCount == 4)
                     {
-                        byte[] pixels = dib.icXOR;
-                        pixels = DIBitmap.FlipYBuffer(pixels, dib.Width, dib.Height, dib.XorStride);
-                        BitmapSource bp = BitmapSource.Create(dib.Width, dib.Height, 96, 96, PixelFormats.Indexed4, GetPalette(dib.icColors, true), pixels, dib.XorStride);
+                        byte[] pixels = CursorFrame.iconImage.icXOR;
+                        pixels = Utilities.FlipYBuffer(pixels, CursorFrame.Width, CursorFrame.Height, CursorFrame.iconImage.XorStride);
+                        BitmapSource bp = BitmapSource.Create(CursorFrame.Width, CursorFrame.Height, 96, 96, PixelFormats.Indexed4, GetPalette(CursorFrame.iconImage.icColors, true), pixels, CursorFrame.iconImage.XorStride);
                         frame = BitmapFrame.Create(bp);
                     }
                     else
                     {
                         try
                         {
-                            byte[] pixels = dib.icXOR;
-                            pixels = DIBitmap.FlipYBuffer(pixels, dib.Width, dib.Height, dib.XorStride);
-                            BitmapSource bp = BitmapSource.Create(dib.Width, dib.Height, 96, 96, PixelFormats.Indexed1, GetPalette(dib.icColors, true), pixels, dib.XorStride);
+                            byte[] pixels = CursorFrame.iconImage.icXOR;
+                            pixels = Utilities.FlipYBuffer(pixels, CursorFrame.Width, CursorFrame.Height, CursorFrame.iconImage.XorStride);
+                            BitmapSource bp = BitmapSource.Create(CursorFrame.Width, CursorFrame.Height, 96, 96, PixelFormats.Indexed1, GetPalette(CursorFrame.iconImage.icColors, true), pixels, CursorFrame.iconImage.XorStride);
                             frame = BitmapFrame.Create(bp);
                         }
                         catch { continue; }
                     }
 
-                    if (dib.icAND != null)
+                    if (CursorFrame.iconImage.icAND?.Length > 0)
                     {
                         RGBQUAD[] palette = new RGBQUAD[2] { RGBQUAD.FromRGBA(0, 0, 0, 0), RGBQUAD.FromRGBA(255, 255, 255, 255) };
-                        byte[] pixels = dib.icAND;
-                        pixels = DIBitmap.FlipYBuffer(pixels, dib.Width, dib.Height, dib.AndStride);
-                        BitmapSource AND = BitmapSource.Create(dib.Width, dib.Height,
-                            96, 96, PixelFormats.Indexed1, GetPalette(palette, true), pixels, dib.AndStride);
+                        byte[] pixels = CursorFrame.iconImage.icAND;
+                        pixels = Utilities.FlipYBuffer(pixels, CursorFrame.Width, CursorFrame.Height, CursorFrame.iconImage.AndStride);
+                        BitmapSource AND = BitmapSource.Create(CursorFrame.Width, CursorFrame.Height,
+                            96, 96, PixelFormats.Indexed1, GetPalette(palette, true), pixels, CursorFrame.iconImage.AndStride);
 
                         EditableBitmapImage editableXOR = new EditableBitmapImage(frame);
                         EditableBitmapImage editableAND = new EditableBitmapImage(AND);
@@ -109,12 +108,12 @@ namespace HL.IconPro.Lib.Wpf
                 {
                     try
                     {
-                        PngBitmapDecoder decoder = new PngBitmapDecoder(frameStream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
+                        PngBitmapDecoder decoder = new PngBitmapDecoder(new System.IO.MemoryStream(CursorFrame.pngBuffer), BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
                         frame = decoder.Frames[0];
                     }
                     catch
                     {
-                        frame = BitmapFrame.Create(CreateEmptyBitmap(cursorFrame.Width));
+                        frame = BitmapFrame.Create(CreateEmptyBitmap(CursorFrame.Width));
                     }
                 }
                 _Frames.Add(frame);

@@ -21,7 +21,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using HL.IconPro.Lib.Core.DIB;
 using HL.IconPro.Lib.Core;
 
 namespace HL.IconPro.Lib.Wpf
@@ -70,14 +69,25 @@ namespace HL.IconPro.Lib.Wpf
 
         public void Save(System.IO.Stream Output)
         {
-            CursorFile IconFile = new CursorFile();
+            File CursorFile = new File();
+            CursorFile.Type = FileType.CURSOR;
             foreach (BitmapFrame frame in _Frames)
             {
                 ushort[] hotspot = GetHotspot(frame);
-                CursorFrame iconFrame = CursorFrame.Create(GetBitmapFrameBuffer(frame, UsePngCompression), hotspot[0], hotspot[1]);
-                IconFile.Frames.Add(iconFrame);
+                Frame CursorFrame = Frame.Create(GetImageFrameBuffer(frame, UsePngCompression));
+                CursorFrame.iconDir.wPlanes = hotspot[0];
+                CursorFrame.iconDir.wBitCount = hotspot[1];
+                if (CursorFrame.iconImage != null)
+                {
+                    CursorFrame.iconImage.icAND = new byte[0];
+                    Helpers.MASK(CursorFrame.BitsPerPixel, ref CursorFrame.iconImage.icXOR,
+                        ref CursorFrame.iconImage.icAND, CursorFrame.iconImage.AndStride,
+                        CursorFrame.iconImage.XorStride, CursorFrame.Width, CursorFrame.Height,
+                        CursorFrame.iconImage.icColors);
+                }
+                CursorFile.Frames.Add(CursorFrame);
             }
-            IconFile.Write(Output);
+            CursorFile.Write(Output);
         }
 
         #endregion

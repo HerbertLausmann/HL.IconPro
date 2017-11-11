@@ -21,7 +21,7 @@
 				<DropShadowEffect ShadowDepth="0"/>
 			</Border.Effect>
 			<Border.Background>
-				<ImageBrush ImageSource="/HL.IconPro;component/Images/Transparency Grid.png" Stretch="UniformToFill"/>
+				<ImageBrush ImageSource="/iconpro;component/Images/Transparency Grid.png" Stretch="UniformToFill"/>
 			</Border.Background>
 			<Image Source="{Binding Preview, Mode=OneWay}" Stretch="None"/>
 		</Border>

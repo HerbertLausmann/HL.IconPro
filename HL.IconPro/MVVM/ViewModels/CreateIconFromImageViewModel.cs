@@ -45,6 +45,7 @@ namespace HL.IconPro.MVVM.ViewModels
             {
                 _BitDepths.Add(4, "4 BPP");
             }
+            SelectedBitDepth = 0;
         }
 
         public CreateIconFromImageViewModel() { }
@@ -118,11 +119,11 @@ namespace HL.IconPro.MVVM.ViewModels
                     {
                         _Sizes[_Sizes.IndexOf(size)].Enabled = true;
                     }
-                    foreach (Models.FrameSizeModel size in _Sizes.Where(x => x.GetSize().Width > 48))
-                    {
-                        _Sizes[_Sizes.IndexOf(size)].Enabled = false;
-                        _Sizes[_Sizes.IndexOf(size)].Checked = false;
-                    }
+                    // foreach (Models.FrameSizeModel size in _Sizes.Where(x => x.GetSize().Width > 48))
+                    // {
+                    //     _Sizes[_Sizes.IndexOf(size)].Enabled = false;
+                    //     _Sizes[_Sizes.IndexOf(size)].Checked = false;
+                    // }
                 }
                 else if (_BitDepths.ElementAt(value).Key == 4)
                 {
@@ -130,11 +131,11 @@ namespace HL.IconPro.MVVM.ViewModels
                     {
                         _Sizes[_Sizes.IndexOf(size)].Enabled = true;
                     }
-                    foreach (Models.FrameSizeModel size in _Sizes.Where(x => x.GetSize().Width > 48))
-                    {
-                        _Sizes[_Sizes.IndexOf(size)].Enabled = false;
-                        _Sizes[_Sizes.IndexOf(size)].Checked = false;
-                    }
+                    //foreach (Models.FrameSizeModel size in _Sizes.Where(x => x.GetSize().Width > 48))
+                    //{
+                    //    _Sizes[_Sizes.IndexOf(size)].Enabled = false;
+                    //    _Sizes[_Sizes.IndexOf(size)].Checked = false;
+                    //}
                 }
                 else if (_BitDepths.ElementAt(value).Key == (32 + 8 + 4))
                 {
@@ -149,11 +150,11 @@ namespace HL.IconPro.MVVM.ViewModels
                     {
                         _Sizes[_Sizes.IndexOf(size)].Enabled = true;
                     }
-                    foreach (Models.FrameSizeModel size in _Sizes.Where(x => x.GetSize().Width > 48))
-                    {
-                        _Sizes[_Sizes.IndexOf(size)].Enabled = false;
-                        _Sizes[_Sizes.IndexOf(size)].Checked = false;
-                    }
+                    // foreach (Models.FrameSizeModel size in _Sizes.Where(x => x.GetSize().Width > 48))
+                    // {
+                    //     _Sizes[_Sizes.IndexOf(size)].Enabled = false;
+                    //     _Sizes[_Sizes.IndexOf(size)].Checked = false;
+                    // }
                 }
             }
         }
@@ -168,7 +169,13 @@ namespace HL.IconPro.MVVM.ViewModels
         #endregion
 
         #region Static
-        public static readonly int[] IconSizes = new int[] { 16, 24, 32, 48, 64, 72, 96, 128, 256 };
+        /// <summary>
+        /// After opening some windows icons I've realized that they've included also the 20x20 and 40x40 frame sizes.
+        /// I have no ideia about why, but, I decided to include these sizes as well.
+        /// The constant bellow is a global constant
+        /// </summary>
+        // public static readonly int[] IconSizes = new int[] { 16, 24, 32, 48, 64, 72, 96, 128, 256 };
+        public static readonly int[] IconSizes = new int[] { 16, 20, 24, 32, 40, 48, 64, 72, 96, 128, 256 };
         #endregion
 
         #region Commands
@@ -184,14 +191,25 @@ namespace HL.IconPro.MVVM.ViewModels
                          if (size.Checked == true)
                          {
                              BitmapSource img = IconPro.Lib.Wpf.Helpers.GetResized(_Image, (int)size.GetSize().Width);
-                             if (size.GetSize().Width < 64)
+                             if (_BitDepths.ElementAt(SelectedBitDepth).Value.Contains("4 BPP"))
                              {
-                                 if (_BitDepths.ElementAt(SelectedBitDepth).Value.Contains("4 BPP"))
+                                 if (img.Format.BitsPerPixel == 4)
+                                 {
+                                     mwvm.Frames.Add(new Models.IconFrameModel(BitmapFrame.Create(img), _Image.Decoder));
+                                 }
+                                 else
                                  {
                                      BitmapSource img4bit = IconPro.Lib.Wpf.Helpers.Get4BitImage(img);
                                      mwvm.Frames.Add(new Models.IconFrameModel(BitmapFrame.Create(img4bit), _Image.Decoder));
                                  }
-                                 if (_BitDepths.ElementAt(SelectedBitDepth).Value.Contains("8 BPP"))
+                             }
+                             if (_BitDepths.ElementAt(SelectedBitDepth).Value.Contains("8 BPP"))
+                             {
+                                 if (img.Format.BitsPerPixel == 8)
+                                 {
+                                     mwvm.Frames.Add(new Models.IconFrameModel(BitmapFrame.Create(img), _Image.Decoder));
+                                 }
+                                 else
                                  {
                                      BitmapSource img8bit = IconPro.Lib.Wpf.Helpers.Get8BitImage(img);
                                      mwvm.Frames.Add(new Models.IconFrameModel(BitmapFrame.Create(img8bit), _Image.Decoder));
@@ -199,7 +217,6 @@ namespace HL.IconPro.MVVM.ViewModels
                              }
                              if (_BitDepths.ElementAt(SelectedBitDepth).Value.Contains("32 BPP"))
                                  mwvm.Frames.Add(new Models.IconFrameModel(BitmapFrame.Create(IconPro.Lib.Wpf.Helpers.GetRGBA32BitImage(img)), _Image.Decoder));
-                             ;
                          }
                      }
                      MainWindow mw = new MainWindow();

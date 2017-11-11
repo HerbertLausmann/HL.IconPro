@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Windows.Media.Imaging;
 using System.Windows.Input;
+using System.Windows;
 
 namespace HL.IconPro.MVVM.ViewModels
 {
@@ -156,25 +157,26 @@ namespace HL.IconPro.MVVM.ViewModels
         {
             IconPro.Lib.Wpf.IconBitmapDecoder decoder = new Lib.Wpf.IconBitmapDecoder();
             decoder.Open(Source);
-            //System.Windows.Media.Imaging.IconBitmapDecoder decoder =
-            //    new System.Windows.Media.Imaging.IconBitmapDecoder(Source, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
+
+            // System.Windows.Media.Imaging.IconBitmapDecoder decoder = new
+            //   System.Windows.Media.Imaging.IconBitmapDecoder(Source, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
             foreach (BitmapFrame bp in decoder.Frames)
             {
                 _Frames.AddWithoutSort(new Models.IconFrameModel(bp, bp.Decoder));
             }
             decoder = null;
+            if (_Frames?.Count > 0) SelectedFrame = _Frames[0];
         }
         public void OpenCursor(System.IO.Stream Source)
         {
             IconPro.Lib.Wpf.CursorBitmapDecoder decoder = new Lib.Wpf.CursorBitmapDecoder();
             decoder.Open(Source);
-            //System.Windows.Media.Imaging.IconBitmapDecoder decoder =
-            //    new System.Windows.Media.Imaging.IconBitmapDecoder(Source, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
             foreach (BitmapFrame bp in decoder.Frames)
             {
                 _Frames.AddWithoutSort(new Models.IconFrameModel(bp, bp.Decoder));
             }
             decoder = null;
+            if (_Frames?.Count > 0) SelectedFrame = _Frames[0];
         }
         protected override void OnPropertyChanged(string Name)
         {
@@ -216,11 +218,14 @@ namespace HL.IconPro.MVVM.ViewModels
                          _Informations.Clear();
                          SelectedFrame = null;
                          Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
-                         dialog.Filter = "Icon File (*.ico)|*.ico";
+                         dialog.Filter = "Icon/Cursor(*.ico, *.cur)|*.ico;*.cur";
                          dialog.CheckFileExists = true;
                          if (dialog.ShowDialog() == false) return;
                          System.IO.FileStream fs = new System.IO.FileStream(dialog.FileName, System.IO.FileMode.Open);
-                         OpenIcon(fs);
+                         if (dialog.FileName.ToLower().EndsWith(".ico"))
+                             OpenIcon(fs);
+                         else
+                             OpenCursor(fs);
                          fs.Close();
                      })));
             }
@@ -253,9 +258,12 @@ namespace HL.IconPro.MVVM.ViewModels
             {
                 return GetCommand("Export", new Command(new Action<object>((object parameter) =>
                      {
+                         var res = System.Windows.MessageBox.Show("You are going to export all the frames of this icon file as PNG images. That means, maybe, dozens of images. Are you sure? To export an icon file, use the SAVE option!",
+                             "Are you sure?", System.Windows.MessageBoxButton.YesNo);
+                         if (res == System.Windows.MessageBoxResult.No) return;
                          Lib.Wpf.Dialogs.FolderBrowserDialog dialog = new Lib.Wpf.Dialogs.FolderBrowserDialog();
                          dialog.Caption = "Select de output export folder:";
-                         if (dialog.ShowDialog() == true)
+                         if (dialog.ShowDialog(parameter as System.Windows.Window) == true)
                          {
                              string exportFolder = dialog.FolderPath;
                              if (!System.IO.Directory.Exists(exportFolder))
@@ -311,14 +319,23 @@ namespace HL.IconPro.MVVM.ViewModels
                 return GetCommand("CreateFrame", new Command(new Action<object>((object parameter) =>
                      {
                          entry: Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
-                         dialog.Filter = "Portable Network Graphics (*.png)|*png";
+                         dialog.Filter = "PNG/SVG file(*.png;*.svg)|*.png;*.svg";
                          dialog.CheckFileExists = true;
-                         if (dialog.ShowDialog() == false) return;
+                         if (dialog.ShowDialog(parameter as Window) == false) return;
+
                          System.IO.FileStream fs = new System.IO.FileStream(dialog.FileName, System.IO.FileMode.Open);
-                         System.Windows.Media.Imaging.BitmapFrame frame;
-                         System.Windows.Media.Imaging.BitmapDecoder dec =
-                             System.Windows.Media.Imaging.BitmapDecoder.Create(fs, System.Windows.Media.Imaging.BitmapCreateOptions.None, System.Windows.Media.Imaging.BitmapCacheOption.OnLoad);
-                         frame = dec.Frames[0];
+                         BitmapFrame frame = null;
+
+                         if (dialog.FileName.ToLower().EndsWith(".png"))
+                         {
+                             BitmapDecoder dec =
+                                             BitmapDecoder.Create(fs, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
+                             frame = dec.Frames[0];
+                         }
+                         else
+                         {
+                             frame = BitmapFrame.Create(Lib.Wpf.Tools.SVGConverter.GetBitmapSource(fs));
+                         }
                          fs.Close();
                          if (frame.PixelWidth != frame.PixelHeight)
                          {

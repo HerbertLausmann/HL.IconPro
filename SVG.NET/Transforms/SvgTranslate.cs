@@ -6,6 +6,7 @@ using System.Text;
 
 namespace Svg.Transforms
 {
+#pragma warning disable
     public sealed class SvgTranslate : SvgTransform
     {
         private float x;

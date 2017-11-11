@@ -20,9 +20,13 @@ using System.Text;
 
 namespace HL.IconPro.Lib.Core
 {
+    /// <summary>
+    /// A icon/cursor frame might come as a Bitmap Image (with a mask to give the transparency), 
+    /// or a PNG image (only acceptable for the 256x256 size)
+    /// </summary>
     public enum FrameType
     {
         PNG,
-        DIB
+        BITMAP
     };
 }

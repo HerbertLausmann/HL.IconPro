@@ -35,14 +35,14 @@ namespace HL.IconPro.MVVM.ViewModels
         {
             get
             {
-                return "WPF Lib Version: " + HL.IconPro.Lib.Wpf.Helpers.Version;
+                return "WPF LIB VERSION: " + HL.IconPro.Lib.Wpf.Helpers.Version;
             }
         }
         public string VersionCore
         {
             get
             {
-                return "Core Lib Version: " + HL.IconPro.Lib.Wpf.Helpers.CoreVersion;
+                return "CORE LIB VERSION: " + HL.IconPro.Lib.Wpf.Helpers.CoreVersion;
             }
         }
         #endregion
@@ -169,6 +169,16 @@ namespace HL.IconPro.MVVM.ViewModels
                     })));
             }
         }
+        public ICommand CreateFromFolderCommand
+        {
+            get
+            {
+                return GetCommand("CreateFromFolder", new Command(new Action<object>((object parameter) =>
+                {
+                    FromFolderSource(parameter as WelcomeWindow);
+                })));
+            }
+        }
         public ICommand OpenFileCommand
         {
             get
@@ -201,6 +211,18 @@ namespace HL.IconPro.MVVM.ViewModels
                     {
                         App.Current.Shutdown();
                     })));
+            }
+        }
+
+        public ICommand HelpCommand
+        {
+            get
+            {
+                return GetCommand("Help", new Command(new Action<object>((object parameter) =>
+                {
+                    HelpView view = new HelpView();
+                    view.ShowDialog();
+                })));
             }
         }
         #endregion

@@ -1,6 +1,5 @@
-﻿
-Icon Pro
-Copyright (C) 2015 Herbert Lausmann. All rights reserved.
+﻿Icon Pro
+Copyright (C) 2017 Herbert Lausmann. All rights reserved.
 http://herbertdotlausmann.wordpress.com/
 herbert.lausmann@hotmail.com
 

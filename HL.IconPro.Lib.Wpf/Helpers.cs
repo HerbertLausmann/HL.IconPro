@@ -13,6 +13,7 @@
  *   2. Redistributions in binary form must reproduce the above copyright
  *      notice and this list of conditions.    
  */
+using HL.IconPro.Lib.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +39,7 @@ namespace HL.IconPro.Lib.Wpf
 
         public static BitmapSource Get8BitImage(BitmapSource Source)
         {
-            BitmapSource @out = new FormatConvertedBitmap(Source, PixelFormats.Indexed8, BitmapPalettes.Halftone252Transparent, 75);
+            BitmapSource @out = new FormatConvertedBitmap(Source, PixelFormats.Indexed8, BitmapPalettes.Halftone256Transparent, 75);
             return @out;
         }
 
@@ -48,8 +49,9 @@ namespace HL.IconPro.Lib.Wpf
             return @out;
         }
 
-        public static BitmapSource GetResized(BitmapSource Source, int Size)
+        public static BitmapSource GetResized(BitmapSource src, int Size)
         {
+            BitmapSource Source = src.Clone();
             BitmapSource backup = Source.Clone();
             try
             {
@@ -106,7 +108,7 @@ namespace HL.IconPro.Lib.Wpf
         }
 
         [DllImport("gdi32.dll", CharSet = CharSet.Auto)]
-        public static extern IntPtr CreateDIBSection(IntPtr hdc, [In] ref Core.DIB.BITMAPINFOHEADER pbmi, uint iUsage, out IntPtr ppvBits, IntPtr hSection, uint dwOffset);
+        public static extern IntPtr CreateDIBSection(IntPtr hdc, [In] ref Core.BITMAPINFOHEADER pbmi, uint iUsage, out IntPtr ppvBits, IntPtr hSection, uint dwOffset);
 
         public static string Version { get { return Assembly.GetExecutingAssembly().GetName().Version.ToString(); } }
         public static string CoreVersion
@@ -116,6 +118,110 @@ namespace HL.IconPro.Lib.Wpf
                 return Assembly.GetExecutingAssembly().GetReferencedAssemblies().
  First(x => x.Name == ("HL.IconPro.Lib.Core")).Version.ToString();
             }
+        }
+
+        //  Copyright (c) 2006, Gustavo Franco
+        //  Email:  gustavo_franco@hotmail.com
+        //  All rights reserved.
+
+        //  Redistribution and use in source and binary forms, with or without modification, 
+        //  are permitted provided that the following conditions are met:
+
+        //  Redistributions of source code must retain the above copyright notice, 
+        //  this list of conditions and the following disclaimer. 
+        //  Redistributions in binary form must reproduce the above copyright notice, 
+        //  this list of conditions and the following disclaimer in the documentation 
+        //  and/or other materials provided with the distribution. 
+
+        //  THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+        //  KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+        //  IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR
+        //  PURPOSE. IT CAN BE DISTRIBUTED FREE OF CHARGE AS LONG AS THIS HEADER 
+        //  REMAINS UNCHANGED.
+        public static void MASK(int BPP, ref byte[] XOR, ref byte[] AND, int ANDSTRIDE, int XORSTRIDE, int WIDTH, int HEIGHT, RGBQUAD[] SOURCEPALLETE)
+        {
+            //I took the code bellow from:
+            //https://www.codeproject.com/Articles/16178/IconLib-Icons-Unfolded-MultiIcon-and-Windows-Vista
+
+            AND = new byte[Math.Abs(ANDSTRIDE) * HEIGHT];
+            //Let extract the AND image from the XOR image
+            int strideC = Math.Abs(XORSTRIDE);
+            int strideB = Math.Abs(ANDSTRIDE);
+            int bpp = BPP;
+            int posCY;
+            int posCX;
+            int posBY;
+            int color;
+            Color tColor;
+            RGBQUAD paletteColor;
+
+            for (int y = 0; y < HEIGHT; y++)
+            {
+                posBY = strideB * y;
+                posCY = strideC * y;
+                for (int x = 0; x < WIDTH; x++)
+                {
+                    switch (bpp)
+                    {
+                        case 1:
+                            AND[(x >> 3) + posCY] = (byte)XOR[(x >> 3) + posCY];
+                            break;
+                        case 4:
+                            color = XOR[(x >> 1) + posCY];
+                            paletteColor = SOURCEPALLETE[(x & 1) == 0 ? color >> 4 : color & 0x0F];
+                            if (paletteColor.rgbReserved < 255)
+                            {
+                                AND[(x >> 3) + posBY] |= (byte)(0x80 >> (x & 7));
+                                XOR[(x >> 1) + posCY] &= (byte)((x & 1) == 0 ? 0x0F : 0xF0);
+                            }
+                            break;
+                        case 8:
+                            color = XOR[x + posCY];
+                            paletteColor = SOURCEPALLETE[color];
+                            if (paletteColor.rgbReserved < 255)
+                            {
+                                AND[(x >> 3) + posBY] |= (byte)(0x80 >> (x & 7));
+                                XOR[x + posCY] = 0;
+                            }
+                            break;
+                        case 16:
+                            throw new NotSupportedException("16 bpp images are not supported for Icons");
+                        case 24:
+                            posCX = x * 3;
+                            tColor = Color.FromArgb(0, XOR[posCX + posCY + 0],
+                                                        XOR[posCX + posCY + 1],
+                                                        XOR[posCX + posCY + 2]);
+                            if (tColor.A < 255)
+                                AND[(x >> 3) + posBY] |= (byte)(0x80 >> (x & 7));
+                            break;
+                        case 32:
+                            if (XOR[(x << 2) + posCY + 3] == 0)
+                                AND[(x >> 3) + posBY] |= (byte)(0x80 >> (x & 7));
+
+
+                            //    if (XOR[(x << 2) + posCY + 0] == MASKEDCOLOR.B &&
+                            //        XOR[(x << 2) + posCY + 1] == MASKEDCOLOR.G &&
+                            //        XOR[(x << 2) + posCY + 2] == MASKEDCOLOR.R)
+                            //    {
+                            //        AND[(x >> 3) + posBY] |= (byte)(0x80 >> (x & 7));
+                            //        XOR[(x << 2) + posCY + 0] = 0;
+                            //        XOR[(x << 2) + posCY + 1] = 0;
+                            //        XOR[(x << 2) + posCY + 2] = 0;
+                            //    }
+                            //    else
+                            //    {
+                            //        XOR[(x << 2) + posCY + 3] = 255;
+                            //    }
+                            break;
+                    }
+                }
+            }
+            //Utilities.FlipYBuffer(AND, WIDTH, HEIGHT, ANDSTRIDE);
+        }
+
+        public static bool CompareRGBQUADToColor(RGBQUAD rgbQuad, Color color)
+        {
+            return rgbQuad.rgbRed == color.R && rgbQuad.rgbGreen == color.G && rgbQuad.rgbBlue == color.B;
         }
     }
 }

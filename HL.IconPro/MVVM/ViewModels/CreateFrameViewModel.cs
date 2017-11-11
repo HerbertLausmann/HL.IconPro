@@ -24,16 +24,19 @@ namespace HL.IconPro.MVVM.ViewModels
         {
             _SupportedSizes = new Dictionary<int, string>();
             _BitDepths = new Dictionary<int, string>();
-            _Source = Lib.Wpf.Helpers.GetRGBA32BitImage(Source);
+            _Source = Source;
             foreach (int size in CreateIconFromImageViewModel.IconSizes)
             {
                 if (size > Source.PixelWidth) break;
                 _SupportedSizes.Add(size, string.Format("{0} x {0}", size));
             }
             _SupportedSizes = _SupportedSizes.Reverse().ToDictionary(x => x.Key, x => x.Value);
-            _BitDepths.Add(32, "32 BPP");
-            _BitDepths.Add(8, "8 BPP");
-            _BitDepths.Add(4, "4 BPP");
+            if (Source.Format.BitsPerPixel >= 24)
+                _BitDepths.Add(32, "32 BPP");
+            if (Source.Format.BitsPerPixel >= 8)
+                _BitDepths.Add(8, "8 BPP");
+            if (Source.Format.BitsPerPixel >= 4)
+                _BitDepths.Add(4, "4 BPP");
         }
         #endregion
 

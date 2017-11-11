@@ -20,37 +20,37 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace HL.IconPro.Lib.Core.DIB
+namespace HL.IconPro.Lib.Core
 {
-    [StructLayout(LayoutKind.Sequential)]
-    public struct RGBQUAD
+    /// <summary>
+    /// A struct on C/C++, this class represents a byte-level pallete entry in the Bitmap image pallete.
+    /// </summary>
+    public class RGBQUAD
     {
         public byte rgbBlue;
         public byte rgbGreen;
         public byte rgbRed;
         public byte rgbReserved;
 
-        public void Read(Stream Source)
+        public void Read(BinaryReader Reader)
         {
-            rgbBlue = (byte)Source.ReadByte();
-            rgbGreen = (byte)Source.ReadByte();
-            rgbRed = (byte)Source.ReadByte();
-            rgbReserved = (byte)Source.ReadByte();
+            rgbBlue = (byte)Reader.ReadByte();
+            rgbGreen = (byte)Reader.ReadByte();
+            rgbRed = (byte)Reader.ReadByte();
+            rgbReserved = (byte)Reader.ReadByte();
         }
-        public void Write(Stream Output)
+        public void Write(BinaryWriter Writer)
         {
-            Output.WriteByte(rgbBlue);
-            Output.WriteByte(rgbGreen);
-            Output.WriteByte(rgbRed);
-            Output.WriteByte(rgbReserved);
+            Writer.Write(rgbBlue);
+            Writer.Write(rgbGreen);
+            Writer.Write(rgbRed);
+            Writer.Write(rgbReserved);
         }
-
         public void SetTransparency(bool Transparent)
         {
             if (Transparent) rgbReserved = 0;
             else rgbReserved = 255;
         }
-
         public static RGBQUAD FromRGB(byte r, byte g, byte b)
         {
             RGBQUAD output = new RGBQUAD();

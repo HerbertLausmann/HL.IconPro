@@ -13,7 +13,7 @@
  *   2. Redistributions in binary form must reproduce the above copyright
  *      notice and this list of conditions.    
  */
-using HL.IconPro.Lib.Core.DIB;
+using HL.IconPro.Lib.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,23 +46,29 @@ namespace HL.IconPro.Lib.Wpf
         #endregion
 
         #region Procedures
-        protected byte[] CreateAndMask(BitmapSource bp)
+        /// <summary>
+        /// Obsolete, but I will keep it for now. Use Helpers.MASK(...)
+        /// </summary>
+        /// <param name="bp"></param>
+        /// <returns></returns>
+        protected byte[] CreateMask(BitmapSource bp)
         {
-            FormatConvertedBitmap output = new FormatConvertedBitmap(bp, PixelFormats.Indexed1, null, 20);
+            var output = new FormatConvertedBitmap(bp, PixelFormats.Indexed1, null, 80);
             WriteableBitmap w = new WriteableBitmap(output);
             byte[] buffer = new byte[w.BackBufferStride * w.PixelHeight];
             System.Runtime.InteropServices.Marshal.Copy(w.BackBuffer, buffer, 0, w.BackBufferStride * w.PixelHeight);
-            return DIBitmap.FlipYBuffer(buffer, w.PixelWidth, w.PixelHeight, w.BackBufferStride);
+            return HL.IconPro.Lib.Core.Utilities.FlipYBuffer(buffer, w.PixelWidth, w.PixelHeight, w.BackBufferStride);
         }
-        protected byte[] GetBitmapFrameBuffer(BitmapFrame Source, bool UsePngCompression)
+        protected byte[] GetImageFrameBuffer(BitmapFrame Source, bool UsePngCompression)
         {
-            if (UsePngCompression && Source.PixelWidth == 256)
+            if (UsePngCompression && (Source.PixelWidth == 256) && Source.Format.BitsPerPixel >= 24)
             {
                 PngBitmapEncoder pngEncoder = new PngBitmapEncoder();
                 pngEncoder.Frames.Add(Source);
                 System.IO.MemoryStream frameBuffer = new System.IO.MemoryStream();
                 pngEncoder.Save(frameBuffer);
                 pngEncoder = null;
+                frameBuffer.Position = 0;
                 return frameBuffer.GetBuffer();
             }
             else
@@ -72,23 +78,20 @@ namespace HL.IconPro.Lib.Wpf
                 System.IO.MemoryStream frameBuffer = new System.IO.MemoryStream();
                 bmpEncoder.Save(frameBuffer);
                 bmpEncoder = null;
-                DIBitmap dib = DIBitmap.FromBitmapFile(frameBuffer);
-                dib.icAND = CreateAndMask(Source);
-                dib.icHeader.biHeight *= 2;
-                return dib.GetBytes();
+                return frameBuffer.GetBuffer();
             }
         }
-        protected BitmapPalette GetPalette(Core.DIB.RGBQUAD[] ColorTable, bool opaque)
+        protected BitmapPalette GetPalette(Core.RGBQUAD[] ColorTable, bool opaque)
         {
             List<Color> palette = new List<Color>(ColorTable.Length);
-            foreach (Core.DIB.RGBQUAD rgb in ColorTable)
+            foreach (Core.RGBQUAD rgb in ColorTable)
             {
                 palette.Add(CreateColor(rgb, opaque));
             }
 
             return new BitmapPalette(palette);
         }
-        protected Color CreateColor(Core.DIB.RGBQUAD rgb, bool opaque)
+        protected Color CreateColor(Core.RGBQUAD rgb, bool opaque)
         {
             byte a = rgb.rgbReserved;
             byte r = rgb.rgbRed;

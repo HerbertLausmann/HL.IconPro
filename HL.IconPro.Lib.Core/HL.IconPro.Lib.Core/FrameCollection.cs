@@ -20,7 +20,10 @@ using System.Text;
 
 namespace HL.IconPro.Lib.Core
 {
-    public class FrameCollection : List<IFrame>
+    /// <summary>
+    /// Represents a collection of frames inside of an Icon/Cursor file
+    /// </summary>
+    public class FrameCollection : List<Frame>
     {
         #region Standard Sorting
         public void SortAscending()
@@ -42,9 +45,9 @@ namespace HL.IconPro.Lib.Core
          */
         public void SortXPCompatible(bool TrueColorFirst)
         {
-            List<IFrame> frames4Bit = this.Where(x => x.BitsPerPixel == 4).ToList();
-            List<IFrame> frames8Bit = this.Where(x => x.BitsPerPixel == 8).ToList();
-            List<IFrame> frames32Bit = this.Where(x => x.BitsPerPixel == 32).ToList();
+            List<Frame> frames4Bit = this.Where(x => x.BitsPerPixel == 4).ToList();
+            List<Frame> frames8Bit = this.Where(x => x.BitsPerPixel == 8).ToList();
+            List<Frame> frames32Bit = this.Where(x => x.BitsPerPixel == 32).ToList();
             if (frames4Bit.Count == 0 && frames8Bit.Count == 0)
             {
                 SortDescending();
@@ -54,57 +57,57 @@ namespace HL.IconPro.Lib.Core
             SortListDescending(frames8Bit);
             SortListDescending(frames32Bit);
             this.Clear();
-            foreach (IconFrame frame in (TrueColorFirst ? frames32Bit : frames4Bit))
+            foreach (Frame frame in (TrueColorFirst ? frames32Bit : frames4Bit))
             {
                 this.Add(frame);
             }
-            foreach (IconFrame frame in frames8Bit)
+            foreach (Frame frame in frames8Bit)
             {
                 this.Add(frame);
             }
-            foreach (IconFrame frame in (TrueColorFirst ? frames4Bit : frames32Bit))
+            foreach (Frame frame in (TrueColorFirst ? frames4Bit : frames32Bit))
             {
                 this.Add(frame);
             }
         }
         public void SortWin7()
         {
-            List<IFrame> frames4Bit = this.Where(x => x.BitsPerPixel == 4).ToList();
-            List<IFrame> frames8Bit = this.Where(x => x.BitsPerPixel == 8).ToList();
-            List<IFrame> frames32Bit = this.Where(x => x.BitsPerPixel == 32).ToList();
+            List<Frame> frames4Bit = this.Where(x => x.BitsPerPixel == 4).ToList();
+            List<Frame> frames8Bit = this.Where(x => x.BitsPerPixel == 8).ToList();
+            List<Frame> frames32Bit = this.Where(x => x.BitsPerPixel == 32).ToList();
 
-            List<IFrame> frames32BitStandard = frames32Bit.Where(x => (x.Width == 16) || (x.Width == 32) || (x.Width == 48)).ToList();
-            List<IFrame> frames32BitOthers = frames32Bit.Where(x => (x.Width != 16) && (x.Width != 32) && (x.Width != 48)).ToList();
+            List<Frame> frames32BitStandard = frames32Bit.Where(x => (x.Width == 16) || (x.Width == 32) || (x.Width == 48)).ToList();
+            List<Frame> frames32BitOthers = frames32Bit.Where(x => (x.Width != 16) && (x.Width != 32) && (x.Width != 48)).ToList();
             SortListDescending(frames4Bit);
             SortListDescending(frames8Bit);
             SortListDescending(frames32BitStandard);
             SortListDescending(frames32BitOthers);
             this.Clear();
-            foreach (IFrame frame in frames4Bit)
+            foreach (Frame frame in frames4Bit)
             {
                 this.Add(frame);
             }
-            foreach (IFrame frame in frames8Bit)
+            foreach (Frame frame in frames8Bit)
             {
                 this.Add(frame);
             }
-            foreach (IFrame frame in frames32BitStandard)
+            foreach (Frame frame in frames32BitStandard)
             {
                 this.Add(frame);
             }
-            foreach (IFrame frame in frames32BitOthers)
+            foreach (Frame frame in frames32BitOthers)
             {
                 this.Add(frame);
             }
         }
         public void SortWin8xStandard()
         {
-            List<IFrame> frames4Bit = this.Where(x => x.BitsPerPixel == 4).ToList();
-            List<IFrame> frames8Bit = this.Where(x => x.BitsPerPixel == 8).ToList();
-            List<IFrame> frames32Bit = this.Where(x => x.BitsPerPixel == 32).ToList();
+            List<Frame> frames4Bit = this.Where(x => x.BitsPerPixel == 4).ToList();
+            List<Frame> frames8Bit = this.Where(x => x.BitsPerPixel == 8).ToList();
+            List<Frame> frames32Bit = this.Where(x => x.BitsPerPixel == 32).ToList();
 
-            List<IFrame> frames32BitStandard = frames32Bit.Where(x => (x.Width == 16) || (x.Width == 32) || (x.Width == 48)).ToList();
-            List<IFrame> frames32BitOthers = frames32Bit.Where(x => (x.Width != 16) && (x.Width != 32) && (x.Width != 48) && (x.Width != 256)).ToList();
+            List<Frame> frames32BitStandard = frames32Bit.Where(x => (x.Width == 16) || (x.Width == 32) || (x.Width == 48)).ToList();
+            List<Frame> frames32BitOthers = frames32Bit.Where(x => (x.Width != 16) && (x.Width != 32) && (x.Width != 48) && (x.Width != 256)).ToList();
             SortListDescending(frames4Bit);
             SortListDescending(frames8Bit);
             SortListDescending(frames32BitStandard);
@@ -114,19 +117,19 @@ namespace HL.IconPro.Lib.Core
             }
             SortListAscending(frames32BitOthers);
             this.Clear();
-            foreach (IFrame frame in frames4Bit)
+            foreach (Frame frame in frames4Bit)
             {
                 this.Add(frame);
             }
-            foreach (IFrame frame in frames8Bit)
+            foreach (Frame frame in frames8Bit)
             {
                 this.Add(frame);
             }
-            foreach (IFrame frame in frames32BitStandard)
+            foreach (Frame frame in frames32BitStandard)
             {
                 this.Add(frame);
             }
-            foreach (IFrame frame in frames32BitOthers)
+            foreach (Frame frame in frames32BitOthers)
             {
                 this.Add(frame);
             }
@@ -134,9 +137,9 @@ namespace HL.IconPro.Lib.Core
         #endregion
 
         #region Private
-        private void SortListDescending(List<IFrame> source)
+        private void SortListDescending(List<Frame> source)
         {
-            source.Sort(new Comparison<IFrame>((IFrame x, IFrame y) =>
+            source.Sort(new Comparison<Frame>((Frame x, Frame y) =>
             {
                 if ((x.Width < y.Width)) return 1;
                 if ((x.Width == y.Width) && (x.BitsPerPixel < y.BitsPerPixel)) return 1;
@@ -146,9 +149,9 @@ namespace HL.IconPro.Lib.Core
                 return 0;
             }));
         }
-        private void SortListAscending(List<IFrame> source)
+        private void SortListAscending(List<Frame> source)
         {
-            source.Sort(new Comparison<IFrame>((IFrame x, IFrame y) =>
+            source.Sort(new Comparison<Frame>((Frame x, Frame y) =>
             {
                 if ((x.Width < y.Width)) return -1;
                 if ((x.Width == y.Width) && (x.BitsPerPixel < y.BitsPerPixel)) return -1;

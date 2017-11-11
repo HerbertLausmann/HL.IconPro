@@ -183,7 +183,7 @@ namespace HL.IconPro.Lib.Wpf.Dialogs
                 WindowInteropHelper interop = new WindowInteropHelper(Parent);
                 parentHwnd = interop.EnsureHandle();
             }
-            string result = SelectFolder(IntPtr.Zero);
+            string result = SelectFolder(parentHwnd);
             if (result == null)
             {
                 _FolderPath = null;
