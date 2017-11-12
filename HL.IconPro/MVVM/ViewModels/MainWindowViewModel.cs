@@ -229,14 +229,18 @@ namespace HL.IconPro.MVVM.ViewModels
                          _Informations.Clear();
                          SelectedFrame = null;
                          Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
-                         dialog.Filter = "Icon/Cursor(*.ico, *.cur)|*.ico;*.cur";
+                         dialog.Filter = "Icon/Cursor(*.ico, *.cur, *.ani)|*.ico;*.cur;*.ani";
                          dialog.CheckFileExists = true;
                          if (dialog.ShowDialog() == false) return;
                          System.IO.FileStream fs = new System.IO.FileStream(dialog.FileName, System.IO.FileMode.Open);
                          if (dialog.FileName.ToLower().EndsWith(".ico"))
                              OpenIcon(fs);
-                         else
+                         else if (dialog.FileName.ToLower().EndsWith(".cur"))
                              OpenCursor(fs);
+                         else if (dialog.FileName.ToLower().EndsWith(".ani"))
+                             OpenAnimatedCursor(fs);
+                         else return;
+                         fs.Close();
                          fs.Close();
                      })));
             }
