@@ -1,4 +1,19 @@
-﻿using HL.IconPro.Lib.Core;
+﻿/*
+ *  Icon Pro
+ *  Copyright (C) 2017 Herbert Lausmann. All rights reserved.
+ *  http://herbertdotlausmann.wordpress.com/
+ *  herbert.lausmann@hotmail.com
+ *
+ *  Redistribution and use in source and binary forms, with or without
+ *  modification, are permitted provided that the following conditions
+ *  are met:
+ *
+ *   1. Redistributions of source code must retain the above copyright
+ *      notice, this list of conditions and the following disclaimer.
+ *   2. Redistributions in binary form must reproduce the above copyright
+ *      notice and this list of conditions.    
+ */
+using HL.IconPro.Lib.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
