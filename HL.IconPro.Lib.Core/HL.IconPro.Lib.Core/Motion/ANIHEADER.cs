@@ -12,15 +12,15 @@ namespace HL.IconPro.Lib.Core.Motion
     [StructLayout(LayoutKind.Sequential, Size = 36)]
     public struct ANIHEADER
     {
-        ushort cbSize;         // The structure’s size (in bytes) and is always set to 36
-        ushort nFrames;        // Number of images (also known as frames) stored in the file
-        ushort nSteps;         // Number of frames to be displayed before the animation repeats
-        ushort iWidth;         // Width of frame (in pixels)
-        ushort iHeight;        // Height of frame (in pixels)
-        ushort iBitCount;      // Number of bits per pixel
-        ushort nPlanes;        // Number of color planes
-        ushort iDispRate;      // Default frame display rate (measured in 1/60th-of-a-second units)
-        ushort bfAttributes;   // ANI attribute bit flags
+       public ushort cbSize;         // The structure’s size (in bytes) and is always set to 36
+       public ushort nFrames;        // Number of images (also known as frames) stored in the file
+       public ushort nSteps;         // Number of frames to be displayed before the animation repeats
+       public ushort iWidth;         // Width of frame (in pixels)
+       public ushort iHeight;        // Height of frame (in pixels)
+       public ushort iBitCount;      // Number of bits per pixel
+       public ushort nPlanes;        // Number of color planes
+       public ushort iDispRate;      // Default frame display rate (measured in 1/60th-of-a-second units)
+       public ushort bfAttributes;   // ANI attribute bit flags
 
         public static ANIHEADER FromBuffer(byte[] source)
         {

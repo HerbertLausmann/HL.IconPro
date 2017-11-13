@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="CursorBitmapDecoder.cs" />
     <Compile Include="CursorBitmapEncoder.cs" />
+    <Compile Include="CursorCodec.cs" />
     <Compile Include="Dialogs\IconBrowserDialog.cs" />
     <Compile Include="EditableBitmapImage.cs" />
     <Compile Include="Dialogs\FolderBrowserDialog.cs" />
@@ -70,6 +71,8 @@
     <Compile Include="IconBitmapEncoder.cs" />
     <Compile Include="BitmapFrameCollectio.cs" />
     <Compile Include="Motion\AnimatedCursorBitmapDecoder.cs" />
+    <Compile Include="Motion\AnimatedCursorBitmapEncoder.cs" />
+    <Compile Include="Motion\AnimatedCursorCodec.cs" />
     <Compile Include="Tools\PEIconExtractor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

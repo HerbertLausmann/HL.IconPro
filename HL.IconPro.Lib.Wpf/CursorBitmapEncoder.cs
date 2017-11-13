@@ -25,13 +25,10 @@ using HL.IconPro.Lib.Core;
 
 namespace HL.IconPro.Lib.Wpf
 {
-    public class CursorBitmapEncoder : Codec
+    public class CursorBitmapEncoder : CursorCodec
     {
         #region Constructors
-        public CursorBitmapEncoder()
-        {
-            _Hotspots = new Dictionary<BitmapFrame, ushort[]>();
-        }
+
         #endregion
 
         #region Destructors
@@ -40,7 +37,6 @@ namespace HL.IconPro.Lib.Wpf
 
         #region Fields
         private bool _UsePngCompression = true;
-        private Dictionary<BitmapFrame, ushort[]> _Hotspots;
         #endregion
 
         #region Properties
@@ -52,20 +48,6 @@ namespace HL.IconPro.Lib.Wpf
         #endregion
 
         #region Procedures
-
-        public ushort[] GetHotspot(BitmapFrame Frame)
-        {
-            if (!base.Frames.Contains(Frame)) throw new InvalidOperationException("Cant get hotspot for a inexistent Frame in Frames collection");
-            bool sucess = _Hotspots.TryGetValue(Frame, out ushort[] hotspot);
-            if (!sucess) hotspot = new ushort[2] { 0, 0 };
-            return hotspot;
-        }
-
-        public void SetHotspot(BitmapFrame Frame, ushort X, ushort Y)
-        {
-            if (!base.Frames.Contains(Frame)) throw new InvalidOperationException("Cant set hotspot for a inexistent Frame in Frames collection");
-            _Hotspots.Add(Frame, new ushort[2] { X, Y });
-        }
 
         public void Save(System.IO.Stream Output)
         {

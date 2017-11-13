@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 
 namespace HL.IconPro.Lib.Wpf
 {
-    public class CursorBitmapDecoder : Codec
+    public class CursorBitmapDecoder : CursorCodec
     {
         public void Open(System.IO.Stream Source)
         {
@@ -117,6 +117,7 @@ namespace HL.IconPro.Lib.Wpf
                     }
                 }
                 _Frames.Add(frame);
+                SetHotspot(frame, CursorFrame.iconDir.wPlanes, CursorFrame.iconDir.wBitCount);
             }
         }
     }
