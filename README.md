@@ -1,6 +1,8 @@
 # ICON PRO
 ### Written in C# + WPF (.Net 4.6.1)
 ### Create Windows Icons easily!
+<a href="https://www.youtube.com/watch?v=5yy3UKVHmVc" target="_blank"><img src="iconproyoutubevideoprint.png?raw=tru" 
+alt="Icon Pro Presentation" width="480" height="280" border="10" /></a>
 
 ### This project is divided in three layers.
 
@@ -23,3 +25,6 @@ Any way, I hope you guys find this tool useful!
 
 This project uses the SVG.NET Library, from the following Git:
 [SVG.NET](https://github.com/vvvv/SVG)
+
+### Roadmap
+<img src="/Media/Icon Pro Roadmap-01.jpg?raw=true" width="90%" height="90%"/>
