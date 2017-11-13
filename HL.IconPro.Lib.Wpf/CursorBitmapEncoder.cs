@@ -57,6 +57,7 @@ namespace HL.IconPro.Lib.Wpf
             {
                 ushort[] hotspot = GetHotspot(frame);
                 Frame CursorFrame = Frame.Create(GetImageFrameBuffer(frame, UsePngCompression));
+                CursorFrame.CreateIconDir();
                 CursorFrame.iconDir.wPlanes = hotspot[0];
                 CursorFrame.iconDir.wBitCount = hotspot[1];
                 if (CursorFrame.iconImage != null)

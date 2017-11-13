@@ -26,6 +26,12 @@ namespace HL.IconPro.Lib.Core.Motion
     /// </summary>
     public class ANI
     {
+
+        public ANI()
+        {
+            _Frames = new List<byte[]>();
+        }
+
         private List<byte[]> _Frames;
         private string _IART;
         private string _INAM;
@@ -102,6 +108,7 @@ namespace HL.IconPro.Lib.Core.Motion
             CHUNK header = new CHUNK();
             header.chunkID = "anih";
             header.chunkData = _Header.GetBuffer();
+            Riff.children.Add(header);
 
             CHUNK frames = new CHUNK();
             frames.chunkID = "LIST";

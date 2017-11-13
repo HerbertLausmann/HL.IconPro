@@ -40,22 +40,55 @@ namespace HL.IconPro.Lib.Core.Motion
         public static ANIHEADER FromBuffer(byte[] source)
         {
             // Pin the managed memory while, copy it out the data, then unpin it
-            GCHandle handle = GCHandle.Alloc(source, GCHandleType.Pinned);
-            ANIHEADER header = (ANIHEADER)Marshal.PtrToStructure(handle.AddrOfPinnedObject(), typeof(ANIHEADER));
-            handle.Free();
+            //GCHandle handle = GCHandle.Alloc(source, GCHandleType.Pinned);
+            //ANIHEADER header = (ANIHEADER)Marshal.PtrToStructure(handle.AddrOfPinnedObject(), typeof(ANIHEADER));
+            //handle.Free();
+            //return header;
+
+            MemoryStream stream = new MemoryStream(source);
+            BinaryReader reader = new BinaryReader(stream);
+            ANIHEADER header = new ANIHEADER();
+
+            header.cbSize = reader.ReadUInt16();
+            header.nFrames = reader.ReadUInt16();
+            header.nSteps = reader.ReadUInt16();
+            header.iWidth = reader.ReadUInt16();
+            header.iHeight = reader.ReadUInt16();
+            header.iBitCount = reader.ReadUInt16();
+            header.nPlanes = reader.ReadUInt16();
+            header.iDispRate = reader.ReadUInt16();
+            header.bfAttributes = reader.ReadUInt16();
+
+            reader.Close();
+            stream.Close();
             return header;
         }
 
         public byte[] GetBuffer()
         {
-            int size = Marshal.SizeOf(this);
-            byte[] arr = new byte[size];
+            // int size = Marshal.SizeOf(this);
+            // byte[] arr = new byte[size];
+            //
+            // IntPtr ptr = Marshal.AllocHGlobal(size);
+            // Marshal.StructureToPtr(this, ptr, true);
+            // Marshal.Copy(ptr, arr, 0, size);
+            // Marshal.FreeHGlobal(ptr);
+            // return arr;
 
-            IntPtr ptr = Marshal.AllocHGlobal(size);
-            Marshal.StructureToPtr(this, ptr, true);
-            Marshal.Copy(ptr, arr, 0, size);
-            Marshal.FreeHGlobal(ptr);
-            return arr;
+            MemoryStream stream = new MemoryStream(36);
+            BinaryWriter writer = new BinaryWriter(stream);
+            writer.Write(cbSize);
+            writer.Write(nFrames);
+            writer.Write(nSteps);
+            writer.Write(iWidth);
+            writer.Write(iHeight);
+            writer.Write(iBitCount);
+            writer.Write(nPlanes);
+            writer.Write(iDispRate);
+            writer.Write(bfAttributes);
+            writer.Flush();
+
+            return stream.ToArray();
         }
     }
 }

@@ -167,7 +167,7 @@ namespace HL.IconPro.Lib.Core
         /// When creating Icons, this method will generate a valid ICONDIRENTRY 
         /// for this frame based on the Bitmap/PNG from which this Frame was built.
         /// </summary>
-        internal void CreateIconDir()
+        public void CreateIconDir()
         {
             iconDir = new ICONDIRENTRY();
             if (type == FrameType.BITMAP)

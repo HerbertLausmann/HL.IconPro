@@ -175,7 +175,32 @@ namespace HL.IconPro.MVVM.ViewModels
             {
                 return GetCommand("CreateFromFolder", new Command(new Action<object>((object parameter) =>
                 {
-                    FromFolderSource(parameter as WelcomeWindow);
+                    if (!Keyboard.IsKeyDown(Key.LeftCtrl))
+                        FromFolderSource(parameter as WelcomeWindow);
+                    else
+                    {
+                        Lib.Wpf.Dialogs.FolderBrowserDialog folder = new Lib.Wpf.Dialogs.FolderBrowserDialog();
+                        if (folder.ShowDialog(parameter as WelcomeWindow) == true)
+                        {
+                            var frames = System.IO.Directory.GetFiles(folder.FolderPath, "*.png");
+                            Lib.Wpf.Motion.AnimatedCursorBitmapEncoder encoder = new Lib.Wpf.Motion.AnimatedCursorBitmapEncoder();
+                            encoder.SetAuthor("Herbert Lausmann");
+                            encoder.SetName("Animated Windows Cursor Beta");
+                            foreach (string f in frames)
+                            {
+                                encoder.Frames.Add(BitmapFrame.Create(new Uri(f)));
+                            }
+                            Microsoft.Win32.SaveFileDialog s = new Microsoft.Win32.SaveFileDialog();
+                            s.Filter = "Animated Cursor File (*.ani)|*.ani";
+                            if (s.ShowDialog() == true)
+                            {
+                                System.IO.FileStream fs = new System.IO.FileStream(s.FileName, System.IO.FileMode.Create);
+                                encoder.FrameRate = 15;
+                                encoder.Save(fs);
+                                fs.Close();
+                            }
+                        }
+                    }
                 })));
             }
         }

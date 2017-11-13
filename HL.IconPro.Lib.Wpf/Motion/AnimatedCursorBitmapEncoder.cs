@@ -36,6 +36,7 @@ namespace HL.IconPro.Lib.Wpf.Motion
             header.iDispRate = FrameRate;
             header.nFrames = (ushort)this.Frames.Count;
             header.nSteps = (ushort)this.Frames.Count;
+            header.iHeight = header.nSteps;
             header.bfAttributes = 0;
             ANI.Header = header;
 
@@ -64,6 +65,16 @@ namespace HL.IconPro.Lib.Wpf.Motion
             {
                 _FrameRate = value;
             }
+        }
+
+        public void SetAuthor(string Author)
+        {
+            _Author = Author;
+        }
+
+        public void SetName(string Name)
+        {
+            _Name = Name;
         }
     }
 }

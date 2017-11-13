@@ -22,17 +22,5 @@ namespace HL.IconPro
 			this.InitializeComponent();
 			// Insert code required on object creation below this point.
 		}
-        protected override void OnKeyDown(KeyEventArgs e)
-        {
-            base.OnKeyDown(e);
-            if (e.Key == Key.LeftCtrl)
-                CreateIcon.Content = "CREATE ICON FROM FOLDER SOURCE";
-        }
-        protected override void OnKeyUp(KeyEventArgs e)
-        {
-            base.OnKeyUp(e);
-            if (e.Key == Key.LeftCtrl)
-                CreateIcon.Content = "CREATE AN ICON FROM IMAGE";
-        }
 	}
 }
