@@ -25,3 +25,6 @@ Any way, I hope you guys find this tool useful!
 
 This project uses the SVG.NET Library, from the following Git:
 [SVG.NET](https://github.com/vvvv/SVG)
+
+### Roadmap
+<img src="/Media/Icon Pro Roadmap-01.jpg?raw=true" width="90%" height="90%"/>
