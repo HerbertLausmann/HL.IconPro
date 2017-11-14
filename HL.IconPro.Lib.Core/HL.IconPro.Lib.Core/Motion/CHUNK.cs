@@ -39,49 +39,50 @@ namespace HL.IconPro.Lib.Core.Motion
         public byte[] chunkData;
         public List<CHUNK> children;
 
-        /// <summary>
-        /// This method will parse the CHUNK tree of the riff file
-        /// </summary>
-        /// <param name="Reader"></param>
-        /// <returns></returns>
-        private static CHUNK[] Parse(BinaryReader Reader)
-        {
-            List<CHUNK> cks = new List<CHUNK>();
-            begin:
-            CHUNK ck = new CHUNK();
-            try
-            {
-                ck.chunkID = FromFourCC(Reader.ReadInt32());
-
-                ck.chunkSize = Reader.ReadUInt32();
-
-                if (ck.chunkID == "RIFF" || ck.chunkID == "LIST")
-                {
-                    byte[] type = new byte[4];
-                    ck.fccType = FromFourCC(Reader.ReadInt32());
-                    ck.chunkData = new byte[ck.chunkSize - 4];
-                    ck.chunkData = new byte[ck.chunkSize];
-                    Reader.Read(ck.chunkData, 0, ck.chunkData.Length);
-                    ck.children = new List<CHUNK>();
-                    ck.children.AddRange(Parse(new BinaryReader(new MemoryStream(ck.chunkData))));
-                    cks.Add(ck);
-                }
-                else
-                {
-                    ck.fccType = null;
-                    ck.chunkData = new byte[ck.chunkSize];
-                    Reader.Read(ck.chunkData, 0, ck.chunkData.Length);
-                    cks.Add(ck);
-                    if (Reader.BaseStream.Position < Reader.BaseStream.Length) goto begin;
-                }
-            }
-            catch { return cks.ToArray(); }
-            return cks.ToArray();
-        }
-
         public static CHUNK ParseRIFFFILE(BinaryReader Source)
         {
-            return Parse(Source)[0];
+            CHUNK riff = new CHUNK();
+            riff.ParseNode(Source);
+            return riff;
+        }
+
+        private void ParseNode(BinaryReader Reader)
+        {
+            chunkID = FromFourCC(Reader.ReadInt32());
+            chunkSize = Reader.ReadUInt32();
+            //On riff files, only chunks with RIFF and LIST ids can have children;
+            //Also, RIFF and LIST chunks contains a second four char ID, the fccType
+            if (chunkID == "RIFF" || chunkID == "LIST")
+            {
+                byte[] type = new byte[4];
+                fccType = FromFourCC(Reader.ReadInt32());
+                chunkData = new byte[chunkSize - 4];
+                Reader.Read(chunkData, 0, chunkData.Length);
+                children = new List<CHUNK>();
+                children.AddRange(ParseList(new BinaryReader(new MemoryStream(chunkData))));
+            }
+            else
+            {
+                fccType = null;
+                chunkData = new byte[chunkSize];
+                Reader.Read(chunkData, 0, chunkData.Length);
+            }
+        }
+
+        private List<CHUNK> ParseList(BinaryReader Reader)
+        {
+            List<CHUNK> cks = new List<CHUNK>();
+            try
+            {
+                while (Reader.BaseStream.CanRead)
+                {
+                    CHUNK node = new CHUNK();
+                    node.ParseNode(Reader);
+                    cks.Add(node);
+                }
+            }
+            catch { }
+            return cks;
         }
 
         public static string FromFourCC(int FourCC)

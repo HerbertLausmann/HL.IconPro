@@ -28,7 +28,7 @@ namespace HL.IconPro.Lib.Wpf.Motion
     {
         protected string _Name;
         protected string _Author;
-        protected ushort _FrameRate;
+        protected uint _FrameRate;
 
         /// <summary>
         /// The cursor's name, if available
@@ -43,6 +43,6 @@ namespace HL.IconPro.Lib.Wpf.Motion
         /// <summary>
         /// Default frame display rate (measured in 1/60th-of-a-second units)
         /// </summary>
-        public ushort FrameRate => _FrameRate;
+        public uint FrameRate => _FrameRate;
     }
 }

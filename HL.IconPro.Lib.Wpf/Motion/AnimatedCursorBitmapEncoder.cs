@@ -36,8 +36,9 @@ namespace HL.IconPro.Lib.Wpf.Motion
             header.iDispRate = FrameRate;
             header.nFrames = (ushort)this.Frames.Count;
             header.nSteps = (ushort)this.Frames.Count;
-            header.iHeight = header.nSteps;
-            header.bfAttributes = 0;
+            header.nPlanes = 1;
+            header.iBitCount = 32;
+            header.bfAttributes = 1;
             ANI.Header = header;
 
             ANI.IART = Author;
@@ -51,11 +52,11 @@ namespace HL.IconPro.Lib.Wpf.Motion
                 MemoryStream encStream = new MemoryStream();
                 enc.Save(encStream);
                 ANI.Frames.Add(encStream.ToArray());
-             }
+            }
             ANI.Write(Output);
         }
 
-        public new ushort FrameRate
+        public new uint FrameRate
         {
             get
             {

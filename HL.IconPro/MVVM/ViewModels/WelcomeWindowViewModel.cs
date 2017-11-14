@@ -186,6 +186,7 @@ namespace HL.IconPro.MVVM.ViewModels
                             Lib.Wpf.Motion.AnimatedCursorBitmapEncoder encoder = new Lib.Wpf.Motion.AnimatedCursorBitmapEncoder();
                             encoder.SetAuthor("Herbert Lausmann");
                             encoder.SetName("Animated Windows Cursor Beta");
+                            encoder.FrameRate = 3;
                             foreach (string f in frames)
                             {
                                 encoder.Frames.Add(BitmapFrame.Create(new Uri(f)));
@@ -195,7 +196,6 @@ namespace HL.IconPro.MVVM.ViewModels
                             if (s.ShowDialog() == true)
                             {
                                 System.IO.FileStream fs = new System.IO.FileStream(s.FileName, System.IO.FileMode.Create);
-                                encoder.FrameRate = 15;
                                 encoder.Save(fs);
                                 fs.Close();
                             }
