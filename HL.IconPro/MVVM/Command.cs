@@ -10,12 +10,12 @@ namespace HL.IconPro.MVVM
     public class Command : ICommand
     {
         private Action<object> _Action;
-        private Func<object, bool> _CanExecuteAction;
+        private Predicate<object> _CanExecuteAction;
 
         public Action<object> Action { get { return _Action; } }
-        public Func<object, bool> CanExecuteAction { get { return _CanExecuteAction; } }
+        public Predicate<object> CanExecuteAction { get { return _CanExecuteAction; } }
 
-        public Command(Action<object> Action, Func<object, bool> CanExecuteAction = null)
+        public Command(Action<object> Action, Predicate<object> CanExecuteAction = null)
         {
             _Action = Action;
             _CanExecuteAction = CanExecuteAction;
