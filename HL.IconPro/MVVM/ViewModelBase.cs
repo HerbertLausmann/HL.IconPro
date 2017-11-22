@@ -7,9 +7,9 @@ using System.Windows.Input;
 
 namespace HL.IconPro.MVVM
 {
-    public abstract class CommandableModelBase : ModelBase
+    public abstract class ViewModelBase : ModelBase
     {
-        public CommandableModelBase()
+        public ViewModelBase()
         {
             Initialize();
         }
@@ -27,6 +27,25 @@ namespace HL.IconPro.MVVM
             {
                 _Commands.Add(Name, Command);
                 goto begin;
+            }
+        }
+        protected ICommand GetCommand(string Name)
+        {
+            if (_Commands.TryGetValue(Name, out ICommand cmd))
+                return cmd;
+            else
+                return null;
+        }
+        protected void SetCommand(ICommand Command, [System.Runtime.CompilerServices.CallerMemberName]string Name = null)
+        {
+            if (Command == null || string.IsNullOrWhiteSpace(Name)) return;
+            if (_Commands.ContainsKey(Name))
+            {
+                _Commands[Name] = Command;
+            }
+            else
+            {
+                _Commands.Add(Name, Command);
             }
         }
     }

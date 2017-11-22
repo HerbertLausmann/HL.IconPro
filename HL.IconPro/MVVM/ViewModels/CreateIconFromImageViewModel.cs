@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 
 namespace HL.IconPro.MVVM.ViewModels
 {
-    class CreateIconFromImageViewModel : CommandableModelBase
+    class CreateIconFromImageViewModel : ViewModelBase
     {
         #region Constructors
         public CreateIconFromImageViewModel(BitmapFrame bp)

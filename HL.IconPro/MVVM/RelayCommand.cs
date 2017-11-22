@@ -15,10 +15,10 @@ namespace HL.IconPro.MVVM
         public Action<object> Action { get { return _Action; } }
         public Predicate<object> CanExecutePredicate { get { return _CanExecutePredicate; } }
 
-        public RelayCommand(Action<object> Action, Predicate<object> CanExecuteAction = null)
+        public RelayCommand(Action<object> Action, Predicate<object> CanExecutePredicate = null)
         {
             _Action = Action;
-            _CanExecutePredicate = CanExecuteAction;
+            _CanExecutePredicate = CanExecutePredicate;
         }
 
         public bool CanExecute(object parameter)

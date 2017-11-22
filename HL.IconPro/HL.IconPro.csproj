@@ -131,7 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MVVM\RelayCommand.cs" />
-    <Compile Include="MVVM\CommandableModelBase.cs" />
+    <Compile Include="MVVM\ViewModelBase.cs" />
     <Compile Include="MVVM\ModelBase.cs" />
     <Compile Include="MVVM\Models\FrameSizeModel.cs" />
     <Compile Include="MVVM\Models\IconFrameModel.cs" />

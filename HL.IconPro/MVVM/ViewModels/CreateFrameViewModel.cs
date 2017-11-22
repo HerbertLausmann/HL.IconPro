@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 
 namespace HL.IconPro.MVVM.ViewModels
 {
-    class CreateFrameViewModel : CommandableModelBase
+    class CreateFrameViewModel : ViewModelBase
     {
         #region Constructors
         public CreateFrameViewModel()

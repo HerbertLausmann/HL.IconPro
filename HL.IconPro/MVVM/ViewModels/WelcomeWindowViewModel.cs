@@ -9,7 +9,7 @@ using System.Reflection;
 
 namespace HL.IconPro.MVVM.ViewModels
 {
-    class WelcomeWindowViewModel : CommandableModelBase
+    class WelcomeWindowViewModel : ViewModelBase
     {
         #region Constructors
         public WelcomeWindowViewModel() { }

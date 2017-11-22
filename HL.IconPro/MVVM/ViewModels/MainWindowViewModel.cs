@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace HL.IconPro.MVVM.ViewModels
 {
-    class MainWindowViewModel : CommandableModelBase
+    class MainWindowViewModel : ViewModelBase
     {
         #region Constructors
         public MainWindowViewModel()
@@ -64,6 +64,7 @@ namespace HL.IconPro.MVVM.ViewModels
                 return (BitmapSource)_SelectedFrame.Frame;
             }
         }
+
         public bool CanSave
         {
             get
@@ -71,27 +72,14 @@ namespace HL.IconPro.MVVM.ViewModels
                 return _Frames.Count > 0;
             }
         }
-        public bool CanExport
-        {
-            get
-            {
-                return _Frames.Count > 0;
-            }
-        }
-        public bool CanDeleteFrame
+        public bool IsSomeFrameSelected
         {
             get
             {
                 return SelectedFrame != null;
             }
         }
-        public bool CanExportFrame
-        {
-            get
-            {
-                return SelectedFrame != null;
-            }
-        }
+
         #endregion
 
         #region Procedures
@@ -264,7 +252,8 @@ namespace HL.IconPro.MVVM.ViewModels
                          bool compression = (canCompress && dialog.FilterIndex == 1);
                          SaveIcon(fs, compression);
                          fs.Close();
-                     })));
+                     }),
+                     new Predicate<object>((object obj) => CanSave)));
             }
         }
         public ICommand ExportCommand
@@ -314,7 +303,8 @@ namespace HL.IconPro.MVVM.ViewModels
                              }
                              System.Diagnostics.Process.Start("explorer.exe", exportFolder);
                          }
-                     })));
+                     }),
+                     new Predicate<object>((object obj) => CanSave)));
             }
         }
         public ICommand DeleteFrameCommand
@@ -324,7 +314,8 @@ namespace HL.IconPro.MVVM.ViewModels
                 return GetCommand(new RelayCommand(new Action<object>((object parameter) =>
                      {
                          _Frames.Remove(SelectedFrame);
-                     })));
+                     }),
+                     new Predicate<object>((object obj) => IsSomeFrameSelected)));
             }
         }
         public ICommand CreateFrameCommand
@@ -389,7 +380,8 @@ namespace HL.IconPro.MVVM.ViewModels
                          encoder.Save(fs);
                          encoder = null;
                          fs.Close();
-                     })));
+                     }),
+                     new Predicate<object>((object obj) => IsSomeFrameSelected)));
             }
         }
         #endregion
