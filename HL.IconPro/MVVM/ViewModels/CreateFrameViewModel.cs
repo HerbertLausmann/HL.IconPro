@@ -129,7 +129,7 @@ namespace HL.IconPro.MVVM.ViewModels
         {
             get
             {
-                return GetCommand("Create", new Command((object parameter) =>
+                return GetCommand(new Command((object parameter) =>
                     {
                         lock (this)
                         {
@@ -144,7 +144,7 @@ namespace HL.IconPro.MVVM.ViewModels
         {
             get
             {
-                return GetCommand("Cancel", new Command((object parameter) =>
+                return GetCommand(new Command((object parameter) =>
                 {
                     lock (this)
                     {

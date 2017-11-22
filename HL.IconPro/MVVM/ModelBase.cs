@@ -10,7 +10,7 @@ namespace HL.IconPro.MVVM
     {
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged(string Name)
+        protected virtual void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName]string Name = null)
         {
             PropertyChanged?.Invoke(this, new System.ComponentModel.PropertyChangedEventArgs(Name));
         }

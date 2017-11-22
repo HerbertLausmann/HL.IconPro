@@ -18,7 +18,7 @@ namespace HL.IconPro.MVVM
             _Commands = new Dictionary<string, ICommand>(5);
         }
         private Dictionary<string, ICommand> _Commands;
-        protected ICommand GetCommand(string Name, ICommand Command)
+        protected ICommand GetCommand(ICommand Command, [System.Runtime.CompilerServices.CallerMemberName]string Name = null)
         {
             begin:
             if (_Commands.TryGetValue(Name, out ICommand cmd))

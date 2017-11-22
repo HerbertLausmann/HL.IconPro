@@ -8,8 +8,8 @@
     <Description>Core multiplatform library for reading and writing Windows Icon files (.ico).
 This lib provides all the classes and methods to write and read icon files bytes.
 Conversion between bytes and a image formats, such BitmapImage(WPF) or Bitmap(GDI+), must be done in a level above library.</Description>
-    <AssemblyVersion>2.2.131.6528</AssemblyVersion>
-    <FileVersion>2.2.131.6528</FileVersion>
+    <AssemblyVersion>2.2.132.6533</AssemblyVersion>
+    <FileVersion>2.2.132.6533</FileVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>

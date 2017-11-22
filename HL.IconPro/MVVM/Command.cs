@@ -10,25 +10,37 @@ namespace HL.IconPro.MVVM
     public class Command : ICommand
     {
         private Action<object> _Action;
+        private Func<object, bool> _CanExecuteAction;
 
         public Action<object> Action { get { return _Action; } }
+        public Func<object, bool> CanExecuteAction { get { return _CanExecuteAction; } }
 
-        public Command(Action<object> Action)
+        public Command(Action<object> Action, Func<object, bool> CanExecuteAction = null)
         {
             _Action = Action;
+            _CanExecuteAction = CanExecuteAction;
+            OnCanExecuteChanged();
         }
 
         public bool CanExecute(object parameter)
         {
-            return _Action != null;
+            if (CanExecuteAction != null)
+                return CanExecuteAction.Invoke(parameter);
+            else
+                return true;
         }
-#pragma warning disable 0067
+
         public event EventHandler CanExecuteChanged;
+
+        protected void OnCanExecuteChanged()
+        {
+            CanExecuteChanged?.Invoke(this, new EventArgs());
+        }
 
         public void Execute(object parameter)
         {
-            if (_Action != null)
-                _Action(parameter);
+            _Action?.Invoke(parameter);
+            OnCanExecuteChanged();
         }
     }
 }
