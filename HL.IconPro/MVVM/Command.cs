@@ -42,5 +42,10 @@ namespace HL.IconPro.MVVM
             _Action?.Invoke(parameter);
             OnCanExecuteChanged();
         }
+
+        public void Refresh()
+        {
+            OnCanExecuteChanged();
+        }
     }
 }

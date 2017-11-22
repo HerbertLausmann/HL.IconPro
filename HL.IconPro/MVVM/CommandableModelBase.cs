@@ -29,5 +29,19 @@ namespace HL.IconPro.MVVM
                 goto begin;
             }
         }
+
+        public Task Refresh()
+        {
+            return Task.Run(() =>
+            {
+                lock (_Commands)
+                {
+                    foreach (ICommand c in _Commands.Values)
+                    {
+                        (c as Command)?.Refresh();
+                    }
+                }
+            });
+        }
     }
 }
