@@ -114,7 +114,7 @@ namespace HL.IconPro.MVVM.ViewModels
         {
             get
             {
-                return GetCommand(new Command(new Action<object>((object parameter) =>
+                return GetCommand(new RelayCommand(new Action<object>((object parameter) =>
                 {
                     MainWindow mw = new MainWindow();
                     mw.Show();
@@ -126,7 +126,7 @@ namespace HL.IconPro.MVVM.ViewModels
         {
             get
             {
-                return GetCommand(new Command(new Action<object>((object parameter) =>
+                return GetCommand(new RelayCommand(new Action<object>((object parameter) =>
                     {
                         Lib.Wpf.Dialogs.IconBrowserDialog dialog = new Lib.Wpf.Dialogs.IconBrowserDialog();
                         if (dialog.ShowDialog((System.Windows.Window)parameter) == true)
@@ -160,7 +160,7 @@ namespace HL.IconPro.MVVM.ViewModels
         {
             get
             {
-                return GetCommand(new Command(new Action<object>((object parameter) =>
+                return GetCommand(new RelayCommand(new Action<object>((object parameter) =>
                     {
                         //if (!Keyboard.IsKeyDown(Key.LeftCtrl))
                         FromStaticImage((WelcomeWindow)parameter);
@@ -173,7 +173,7 @@ namespace HL.IconPro.MVVM.ViewModels
         {
             get
             {
-                return GetCommand(new Command(new Action<object>((object parameter) =>
+                return GetCommand(new RelayCommand(new Action<object>((object parameter) =>
                 {
                     if (!Keyboard.IsKeyDown(Key.LeftCtrl))
                         FromFolderSource(parameter as WelcomeWindow);
@@ -208,7 +208,7 @@ namespace HL.IconPro.MVVM.ViewModels
         {
             get
             {
-                return GetCommand(new Command(new Action<object>((object parameter) =>
+                return GetCommand(new RelayCommand(new Action<object>((object parameter) =>
                     {
                         Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
                         dialog.Filter = "Icon/Cursor(*.ico, *.cur, *.ani)|*.ico;*.cur;*.ani";
@@ -235,7 +235,7 @@ namespace HL.IconPro.MVVM.ViewModels
         {
             get
             {
-                return GetCommand(new Command(new Action<object>((object parameter) =>
+                return GetCommand(new RelayCommand(new Action<object>((object parameter) =>
                     {
                         App.Current.Shutdown();
                     })));
@@ -246,7 +246,7 @@ namespace HL.IconPro.MVVM.ViewModels
         {
             get
             {
-                return GetCommand(new Command(new Action<object>((object parameter) =>
+                return GetCommand(new RelayCommand(new Action<object>((object parameter) =>
                 {
                     HelpView view = new HelpView();
                     view.ShowDialog();

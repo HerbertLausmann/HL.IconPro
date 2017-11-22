@@ -183,7 +183,7 @@ namespace HL.IconPro.MVVM.ViewModels
         {
             get
             {
-                return GetCommand(new Command(new Action<object>((object parameter) =>
+                return GetCommand(new RelayCommand(new Action<object>((object parameter) =>
                  {
                      MVVM.ViewModels.MainWindowViewModel mwvm = new MainWindowViewModel();
                      foreach (Models.FrameSizeModel size in Sizes)
@@ -230,7 +230,7 @@ namespace HL.IconPro.MVVM.ViewModels
         {
             get
             {
-                return GetCommand(new Command(new Action<object>((object parameter) =>
+                return GetCommand(new RelayCommand(new Action<object>((object parameter) =>
                  {
                      WelcomeWindow ww = new WelcomeWindow();
                      ww.Show();

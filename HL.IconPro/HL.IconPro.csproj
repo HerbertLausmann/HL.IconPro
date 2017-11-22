@@ -130,7 +130,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MVVM\Command.cs" />
+    <Compile Include="MVVM\RelayCommand.cs" />
     <Compile Include="MVVM\CommandableModelBase.cs" />
     <Compile Include="MVVM\ModelBase.cs" />
     <Compile Include="MVVM\Models\FrameSizeModel.cs" />

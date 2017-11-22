@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace HL.IconPro.MVVM
 {
-    public class Command : ICommand
+    public class RelayCommand : ICommand
     {
         private Action<object> _Action;
         private Predicate<object> _CanExecuteAction;
@@ -15,11 +15,10 @@ namespace HL.IconPro.MVVM
         public Action<object> Action { get { return _Action; } }
         public Predicate<object> CanExecuteAction { get { return _CanExecuteAction; } }
 
-        public Command(Action<object> Action, Predicate<object> CanExecuteAction = null)
+        public RelayCommand(Action<object> Action, Predicate<object> CanExecuteAction = null)
         {
             _Action = Action;
             _CanExecuteAction = CanExecuteAction;
-            OnCanExecuteChanged();
         }
 
         public bool CanExecute(object parameter)
@@ -30,22 +29,15 @@ namespace HL.IconPro.MVVM
                 return true;
         }
 
-        public event EventHandler CanExecuteChanged;
-
-        protected void OnCanExecuteChanged()
+        public event EventHandler CanExecuteChanged
         {
-            CanExecuteChanged?.Invoke(this, new EventArgs());
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
         }
 
         public void Execute(object parameter)
         {
             _Action?.Invoke(parameter);
-            OnCanExecuteChanged();
-        }
-
-        public void Refresh()
-        {
-            OnCanExecuteChanged();
         }
     }
 }

@@ -129,7 +129,7 @@ namespace HL.IconPro.MVVM.ViewModels
         {
             get
             {
-                return GetCommand(new Command((object parameter) =>
+                return GetCommand(new RelayCommand((object parameter) =>
                     {
                         lock (this)
                         {
@@ -144,7 +144,7 @@ namespace HL.IconPro.MVVM.ViewModels
         {
             get
             {
-                return GetCommand(new Command((object parameter) =>
+                return GetCommand(new RelayCommand((object parameter) =>
                 {
                     lock (this)
                     {

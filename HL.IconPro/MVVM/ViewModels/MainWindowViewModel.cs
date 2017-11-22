@@ -208,7 +208,7 @@ namespace HL.IconPro.MVVM.ViewModels
         {
             get
             {
-                return GetCommand(new Command(new Action<object>((object parameter) =>
+                return GetCommand(new RelayCommand(new Action<object>((object parameter) =>
                 {
                     _Frames.Clear();
                     _Informations.Clear();
@@ -223,7 +223,7 @@ namespace HL.IconPro.MVVM.ViewModels
         {
             get
             {
-                return GetCommand(new Command(new Action<object>((object parameter) =>
+                return GetCommand(new RelayCommand(new Action<object>((object parameter) =>
                      {
                          _Frames.Clear();
                          _Informations.Clear();
@@ -249,7 +249,7 @@ namespace HL.IconPro.MVVM.ViewModels
         {
             get
             {
-                return GetCommand(new Command(new Action<object>((object parameter) =>
+                return GetCommand(new RelayCommand(new Action<object>((object parameter) =>
                      {
                          Microsoft.Win32.SaveFileDialog dialog = new Microsoft.Win32.SaveFileDialog();
                          bool canCompress = Frames.Where(x => x.Size.Width == 256).ToArray().Length > 0;
@@ -271,7 +271,7 @@ namespace HL.IconPro.MVVM.ViewModels
         {
             get
             {
-                return GetCommand(new Command(new Action<object>((object parameter) =>
+                return GetCommand(new RelayCommand(new Action<object>((object parameter) =>
                      {
                          var res = System.Windows.MessageBox.Show("You are going to export all the frames of this icon file as PNG images. That means, maybe, dozens of images. Are you sure? To export an icon file, use the SAVE option!",
                              "Are you sure?", System.Windows.MessageBoxButton.YesNo);
@@ -321,7 +321,7 @@ namespace HL.IconPro.MVVM.ViewModels
         {
             get
             {
-                return GetCommand(new Command(new Action<object>((object parameter) =>
+                return GetCommand(new RelayCommand(new Action<object>((object parameter) =>
                      {
                          _Frames.Remove(SelectedFrame);
                      })));
@@ -331,7 +331,7 @@ namespace HL.IconPro.MVVM.ViewModels
         {
             get
             {
-                return GetCommand(new Command(new Action<object>((object parameter) =>
+                return GetCommand(new RelayCommand(new Action<object>((object parameter) =>
                      {
                          entry: Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
                          dialog.Filter = "PNG/SVG file(*.png;*.svg)|*.png;*.svg";
@@ -376,7 +376,7 @@ namespace HL.IconPro.MVVM.ViewModels
         {
             get
             {
-                return GetCommand(new Command(new Action<object>((object parameter) =>
+                return GetCommand(new RelayCommand(new Action<object>((object parameter) =>
                      {
                          Microsoft.Win32.SaveFileDialog dialog = new Microsoft.Win32.SaveFileDialog();
                          dialog.Filter = "Portable Network Graphics (*.png)|*.png";
