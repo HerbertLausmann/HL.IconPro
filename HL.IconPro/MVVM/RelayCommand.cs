@@ -10,21 +10,21 @@ namespace HL.IconPro.MVVM
     public class RelayCommand : ICommand
     {
         private Action<object> _Action;
-        private Predicate<object> _CanExecuteAction;
+        private Predicate<object> _CanExecutePredicate;
 
         public Action<object> Action { get { return _Action; } }
-        public Predicate<object> CanExecuteAction { get { return _CanExecuteAction; } }
+        public Predicate<object> CanExecutePredicate { get { return _CanExecutePredicate; } }
 
         public RelayCommand(Action<object> Action, Predicate<object> CanExecuteAction = null)
         {
             _Action = Action;
-            _CanExecuteAction = CanExecuteAction;
+            _CanExecutePredicate = CanExecuteAction;
         }
 
         public bool CanExecute(object parameter)
         {
-            if (CanExecuteAction != null)
-                return CanExecuteAction.Invoke(parameter);
+            if (CanExecutePredicate != null)
+                return CanExecutePredicate.Invoke(parameter);
             else
                 return true;
         }
