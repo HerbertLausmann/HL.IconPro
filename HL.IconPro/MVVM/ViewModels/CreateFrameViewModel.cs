@@ -8,10 +8,11 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using HL.MVVM;
 
 namespace HL.IconPro.MVVM.ViewModels
 {
-    class CreateFrameViewModel : ViewModelBase
+    class CreateFrameViewModel : HL.MVVM.ViewModelBase
     {
         #region Constructors
         public CreateFrameViewModel()

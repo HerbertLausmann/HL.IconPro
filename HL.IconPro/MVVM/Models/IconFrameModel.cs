@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using System.Windows;
 using System.Windows.Media;
+using HL.MVVM;
 
 namespace HL.IconPro.MVVM.Models
 {

@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using HL.MVVM;
+
 
 namespace HL.IconPro.MVVM.ViewModels
 {
-    class CreateIconFromImageViewModel : ViewModelBase
+    class CreateIconFromImageViewModel : HL.MVVM.ViewModelBase
     {
         #region Constructors
         public CreateIconFromImageViewModel(BitmapFrame bp)
@@ -104,8 +106,7 @@ namespace HL.IconPro.MVVM.ViewModels
             get { return _SelectedBitDepth; }
             set
             {
-                _SelectedBitDepth = value;
-                OnPropertyChanged("SelectedBitDepth");
+                SetField(ref _SelectedBitDepth, value);
                 if (_BitDepths.ElementAt(value).Key == 32)
                 {
                     foreach (Models.FrameSizeModel size in _Sizes.Where(x => x.GetSize().Width > 16))

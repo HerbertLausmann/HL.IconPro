@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2006
+VisualStudioVersion = 15.0.27004.2008
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HL.IconPro", "HL.IconPro\HL.IconPro.csproj", "{55FC3FA0-C23D-45FC-82A7-C20F1DB83B78}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HL.IconPro.Lib.Core", "HL.IconPro.Lib.Core\HL.IconPro.Lib.Core\HL.IconPro.Lib.Core.csproj", "{7CAB0D6A-052A-4DDD-8979-AA51EADBEC4F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HL.IconPro.Lib.Wpf", "HL.IconPro.Lib.Wpf\HL.IconPro.Lib.Wpf.csproj", "{4E39601D-A8E3-4019-AA02-E62BA744E6CA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HL.MVVM", "..\HL.MVVM\HL.MVVM\HL.MVVM.csproj", "{A2B478CF-3F5D-4DA4-B16E-85B4A1A3A4E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{4E39601D-A8E3-4019-AA02-E62BA744E6CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E39601D-A8E3-4019-AA02-E62BA744E6CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E39601D-A8E3-4019-AA02-E62BA744E6CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2B478CF-3F5D-4DA4-B16E-85B4A1A3A4E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2B478CF-3F5D-4DA4-B16E-85B4A1A3A4E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2B478CF-3F5D-4DA4-B16E-85B4A1A3A4E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2B478CF-3F5D-4DA4-B16E-85B4A1A3A4E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

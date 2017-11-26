@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>HL.IconPro</RootNamespace>
     <AssemblyName>iconpro</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -130,9 +130,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MVVM\RelayCommand.cs" />
-    <Compile Include="MVVM\ViewModelBase.cs" />
-    <Compile Include="MVVM\ModelBase.cs" />
     <Compile Include="MVVM\Models\FrameSizeModel.cs" />
     <Compile Include="MVVM\Models\IconFrameModel.cs" />
     <Compile Include="MVVM\Models\IconFrameModelObservableCollection.cs" />
@@ -205,6 +202,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\HL.MVVM\HL.MVVM\HL.MVVM.csproj">
+      <Project>{a2b478cf-3f5d-4da4-b16e-85b4a1a3a4e1}</Project>
+      <Name>HL.MVVM</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HL.IconPro.Lib.Wpf\HL.IconPro.Lib.Wpf.csproj">
       <Project>{4e39601d-a8e3-4019-aa02-e62ba744e6ca}</Project>
       <Name>HL.IconPro.Lib.Wpf</Name>

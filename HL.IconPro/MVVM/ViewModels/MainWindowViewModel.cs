@@ -7,10 +7,11 @@ using System.Collections.ObjectModel;
 using System.Windows.Media.Imaging;
 using System.Windows.Input;
 using System.Windows;
+using HL.MVVM;
 
 namespace HL.IconPro.MVVM.ViewModels
 {
-    class MainWindowViewModel : ViewModelBase
+    class MainWindowViewModel : HL.MVVM.ViewModelBase
     {
         #region Constructors
         public MainWindowViewModel()

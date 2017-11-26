@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HL.MVVM;
 
 namespace HL.IconPro.MVVM.Models
 {
@@ -24,9 +25,7 @@ namespace HL.IconPro.MVVM.Models
             }
             set
             {
-                _name = value;
-                OnPropertyChanged("Name");
-                OnPropertyChanged("ToString");
+                SetField(ref _name, value);
             }
         }
 
@@ -38,8 +37,7 @@ namespace HL.IconPro.MVVM.Models
             }
             set
             {
-                _value = value;
-                OnPropertyChanged("Value");
+                SetField(ref _value, value);
                 OnPropertyChanged("ToString");
             }
         }

@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Reflection;
+using HL.MVVM;
 
 namespace HL.IconPro.MVVM.ViewModels
 {
-    class WelcomeWindowViewModel : ViewModelBase
+    class WelcomeWindowViewModel : HL.MVVM.ViewModelBase
     {
         #region Constructors
         public WelcomeWindowViewModel() { }

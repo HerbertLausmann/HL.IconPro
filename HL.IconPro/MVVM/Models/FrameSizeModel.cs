@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HL.MVVM;
 
 namespace HL.IconPro.MVVM.Models
 {
@@ -34,8 +35,7 @@ namespace HL.IconPro.MVVM.Models
             get { return _Size; }
             set
             {
-                _Size = value;
-                OnPropertyChanged("Size");
+                SetField(ref _Size, value);
             }
         }
         public bool Enabled
@@ -43,8 +43,7 @@ namespace HL.IconPro.MVVM.Models
             get { return _Enabled; }
             set
             {
-                _Enabled = value;
-                OnPropertyChanged("Enabled");
+                SetField(ref _Enabled, value);
             }
         }
         public bool Checked
@@ -52,8 +51,7 @@ namespace HL.IconPro.MVVM.Models
             get { return _Checked; }
             set
             {
-                _Checked = value;
-                OnPropertyChanged("Checked");
+                SetField(ref _Checked, value);
             }
         }
         #endregion
