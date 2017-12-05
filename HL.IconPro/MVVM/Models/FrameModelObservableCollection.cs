@@ -7,11 +7,11 @@ using HL.MVVM;
 
 namespace HL.IconPro.MVVM.Models
 {
-    class IconFrameModelObservableCollection : System.Collections.ObjectModel.ObservableCollection<IconFrameModel>
+    class FrameModelObservableCollection : System.Collections.ObjectModel.ObservableCollection<FrameModel>
     {
-        public new void Add(IconFrameModel Item)
+        public new void Add(FrameModel Item)
         {
-            Comparison<IconFrameModel> comparer = new Comparison<IconFrameModel>((IconFrameModel x, IconFrameModel y) =>
+            Comparison<FrameModel> comparer = new Comparison<FrameModel>((FrameModel x, FrameModel y) =>
             {
                 if ((x.Size.Width < y.Size.Width && x.PixelFormat.BitsPerPixel == y.PixelFormat.BitsPerPixel)) return -1;
                 if ((x.Size.Width == y.Size.Width) && (x.PixelFormat.BitsPerPixel < y.PixelFormat.BitsPerPixel)) return -1;
@@ -29,16 +29,16 @@ namespace HL.IconPro.MVVM.Models
             base.Insert(i, Item);
         }
 
-        public void AddWithoutSort(IconFrameModel Item)
+        public void AddWithoutSort(FrameModel Item)
         {
             base.Add(Item);
         }
 
-        public IconFrameModel Biggest()
+        public FrameModel Biggest()
         {
             if (Count == 0) return null;
-            IconFrameModel biggest = base[0];
-            foreach (IconFrameModel item in (IconFrameModelObservableCollection)this)
+            FrameModel biggest = base[0];
+            foreach (FrameModel item in (FrameModelObservableCollection)this)
             {
                 if (item.Size.Width > biggest.Size.Width)
                 {

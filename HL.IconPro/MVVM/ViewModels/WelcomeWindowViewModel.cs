@@ -55,7 +55,7 @@ namespace HL.IconPro.MVVM.ViewModels
             dialog.Filter = "PNG/SVG file(*.png;*.svg)|*.png;*.svg";
             dialog.CheckFileExists = true;
             if (dialog.ShowDialog(Source) == false) return;
-            CreateIconFromImageViewModel mwvm = null;
+            CreateFromImageViewModel mwvm = null;
 
             System.IO.FileStream fs = new System.IO.FileStream(dialog.FileName, System.IO.FileMode.Open);
             BitmapFrame frame = null;
@@ -72,7 +72,7 @@ namespace HL.IconPro.MVVM.ViewModels
             }
 
             fs.Close();
-            mwvm = new CreateIconFromImageViewModel(frame);
+            mwvm = new CreateFromImageViewModel(frame);
             if (frame.PixelWidth != frame.PixelHeight)
             {
                 if (System.Windows.MessageBox.Show("The selected source is not square. Would you like to try another image?",
@@ -81,7 +81,7 @@ namespace HL.IconPro.MVVM.ViewModels
                     goto entry;
                 }
             }
-            CreateIconFromImage mw = new CreateIconFromImage();
+            CreateFromImage mw = new CreateFromImage();
             mw.DataContext = mwvm;
             mw.Show();
             Source.Close();
@@ -97,7 +97,7 @@ namespace HL.IconPro.MVVM.ViewModels
             {
                 BitmapFrame fr = BitmapFrame.Create(new Uri(png));
                 fr = BitmapFrame.Create(Lib.Wpf.Helpers.GetResized(fr, fr.PixelWidth));
-                mwvm.Frames.Add(new Models.IconFrameModel(fr, fr.Decoder));
+                mwvm.Frames.Add(new Models.FrameModel(fr, fr.Decoder));
             }
             MainWindow mw = new MainWindow();
             mw.DataContext = mwvm;
@@ -111,7 +111,7 @@ namespace HL.IconPro.MVVM.ViewModels
         #endregion
 
         #region Commands
-        public ICommand CreateAnEmptyIconCommand
+        public ICommand CreateEmptyCommand
         {
             get
             {

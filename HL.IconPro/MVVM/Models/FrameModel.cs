@@ -10,10 +10,10 @@ using HL.MVVM;
 
 namespace HL.IconPro.MVVM.Models
 {
-    class IconFrameModel : ModelBase
+    class FrameModel : ModelBase
     {
         #region Constructors
-        public IconFrameModel(BitmapFrame Frame, BitmapDecoder Decoder)
+        public FrameModel(BitmapFrame Frame, BitmapDecoder Decoder)
         {
             _Frame = Frame;
             _PixelFormat = _Frame.Format;
@@ -31,9 +31,9 @@ namespace HL.IconPro.MVVM.Models
                 _PixelFormat = PixelFormats.Bgra32;
             else
             {
-                if(Frame.Palette.Colors.Count == 16)
+                if (Frame.Palette.Colors.Count == 16)
                     _PixelFormat = PixelFormats.Indexed4;
-                else if(Frame.Palette.Colors.Count == 256)
+                else if (Frame.Palette.Colors.Count == 256)
                     _PixelFormat = PixelFormats.Indexed8;
             }
         }
@@ -48,6 +48,9 @@ namespace HL.IconPro.MVVM.Models
         private Size _Size;
         private PixelFormat _PixelFormat;
         private IconFrameModelType _Type;
+
+        private ushort _HotspotX;
+        private ushort _HotspotY;
         #endregion
 
         #region Properties
@@ -85,6 +88,9 @@ namespace HL.IconPro.MVVM.Models
                 return string.Format("({0}) - {1} BPP", new object[] { Size.ToString(), PixelFormat.BitsPerPixel });
             }
         }
+
+        public ushort HotspotX { get => _HotspotX; set => SetField(ref _HotspotX, value); }
+        public ushort HotspotY { get => _HotspotY; set => SetField(ref _HotspotY, value); }
         #endregion
 
         #region Procedures

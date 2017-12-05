@@ -15,9 +15,9 @@ namespace HL.IconPro
 	/// <summary>
 	/// Interaction logic for CreateIconFromStaticImage.xaml
 	/// </summary>
-	public partial class CreateIconFromImage : Window
+	public partial class CreateFromImage : Window
 	{
-		public CreateIconFromImage()
+		public CreateFromImage()
 		{
 			this.InitializeComponent();
 			// Insert code required on object creation below this point.

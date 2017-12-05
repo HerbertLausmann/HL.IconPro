@@ -11,10 +11,10 @@ using HL.MVVM;
 
 namespace HL.IconPro.MVVM.ViewModels
 {
-    class CreateIconFromImageViewModel : HL.MVVM.ViewModelBase
+    class CreateFromImageViewModel : HL.MVVM.ViewModelBase
     {
         #region Constructors
-        public CreateIconFromImageViewModel(BitmapFrame bp)
+        public CreateFromImageViewModel(BitmapFrame bp)
         {
             _Sizes = new System.Collections.ObjectModel.ObservableCollection<Models.FrameSizeModel>();
             _BitDepths = new Dictionary<int, string>();
@@ -50,7 +50,7 @@ namespace HL.IconPro.MVVM.ViewModels
             SelectedBitDepth = 0;
         }
 
-        public CreateIconFromImageViewModel() { }
+        public CreateFromImageViewModel() { }
         #endregion
 
         #region Destructors
@@ -196,28 +196,28 @@ namespace HL.IconPro.MVVM.ViewModels
                              {
                                  if (img.Format.BitsPerPixel == 4)
                                  {
-                                     mwvm.Frames.Add(new Models.IconFrameModel(BitmapFrame.Create(img), _Image.Decoder));
+                                     mwvm.Frames.Add(new Models.FrameModel(BitmapFrame.Create(img), _Image.Decoder));
                                  }
                                  else
                                  {
                                      BitmapSource img4bit = IconPro.Lib.Wpf.Helpers.Get4BitImage(img);
-                                     mwvm.Frames.Add(new Models.IconFrameModel(BitmapFrame.Create(img4bit), _Image.Decoder));
+                                     mwvm.Frames.Add(new Models.FrameModel(BitmapFrame.Create(img4bit), _Image.Decoder));
                                  }
                              }
                              if (_BitDepths.ElementAt(SelectedBitDepth).Value.Contains("8 BPP"))
                              {
                                  if (img.Format.BitsPerPixel == 8)
                                  {
-                                     mwvm.Frames.Add(new Models.IconFrameModel(BitmapFrame.Create(img), _Image.Decoder));
+                                     mwvm.Frames.Add(new Models.FrameModel(BitmapFrame.Create(img), _Image.Decoder));
                                  }
                                  else
                                  {
                                      BitmapSource img8bit = IconPro.Lib.Wpf.Helpers.Get8BitImage(img);
-                                     mwvm.Frames.Add(new Models.IconFrameModel(BitmapFrame.Create(img8bit), _Image.Decoder));
+                                     mwvm.Frames.Add(new Models.FrameModel(BitmapFrame.Create(img8bit), _Image.Decoder));
                                  }
                              }
                              if (_BitDepths.ElementAt(SelectedBitDepth).Value.Contains("32 BPP"))
-                                 mwvm.Frames.Add(new Models.IconFrameModel(BitmapFrame.Create(IconPro.Lib.Wpf.Helpers.GetRGBA32BitImage(img)), _Image.Decoder));
+                                 mwvm.Frames.Add(new Models.FrameModel(BitmapFrame.Create(IconPro.Lib.Wpf.Helpers.GetRGBA32BitImage(img)), _Image.Decoder));
                          }
                      }
                      MainWindow mw = new MainWindow();

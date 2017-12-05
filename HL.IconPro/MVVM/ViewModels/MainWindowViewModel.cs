@@ -16,8 +16,8 @@ namespace HL.IconPro.MVVM.ViewModels
         #region Constructors
         public MainWindowViewModel()
         {
-            _Informations = new ObservableCollection<Models.IconInformationModel>();
-            _Frames = new Models.IconFrameModelObservableCollection();
+            _Informations = new ObservableCollection<Models.InformationModel>();
+            _Frames = new Models.FrameModelObservableCollection();
         }
         #endregion
 
@@ -26,27 +26,27 @@ namespace HL.IconPro.MVVM.ViewModels
         #endregion
 
         #region Fields
-        private ObservableCollection<Models.IconInformationModel> _Informations;
-        private Models.IconFrameModelObservableCollection _Frames;
-        private Models.IconFrameModel _SelectedFrame;
+        private ObservableCollection<Models.InformationModel> _Informations;
+        private Models.FrameModelObservableCollection _Frames;
+        private Models.FrameModel _SelectedFrame;
         #endregion
 
         #region Properties
-        public ObservableCollection<Models.IconInformationModel> Informations
+        public ObservableCollection<Models.InformationModel> Informations
         {
             get
             {
                 return _Informations;
             }
         }
-        public Models.IconFrameModelObservableCollection Frames
+        public Models.FrameModelObservableCollection Frames
         {
             get
             {
                 return _Frames;
             }
         }
-        public Models.IconFrameModel SelectedFrame
+        public Models.FrameModel SelectedFrame
         {
             get { return _SelectedFrame; }
             set
@@ -89,7 +89,7 @@ namespace HL.IconPro.MVVM.ViewModels
             try
             {
                 _Informations.Clear();
-                _Informations.Add(new Models.IconInformationModel("Frame Dimensions",
+                _Informations.Add(new Models.InformationModel("Frame Dimensions",
                                 string.Format("{0}x{1}", new object[] { Preview.PixelWidth.ToString(), Preview.PixelHeight.ToString() })));
                 long frameSize;
                 if (SelectedFrame.Size.Width == 256)
@@ -114,11 +114,11 @@ namespace HL.IconPro.MVVM.ViewModels
                 }
                 frameSize = (long)Math.Round((double)(frameSize / 1000));
 
-                _Informations.Add(new Models.IconInformationModel("Frame Physical Size", frameSize.ToString() + " KB"));
-                _Informations.Add(new Models.IconInformationModel("Frame Color Depth", Preview.Format.BitsPerPixel.ToString() + "BPP"));
-                _Informations.Add(new Models.IconInformationModel("Frame Decoder", (SelectedFrame.Type == Models.IconFrameModelType.PNG) ? "WIC PNG" : "WIC BMP"));
+                _Informations.Add(new Models.InformationModel("Frame Physical Size", frameSize.ToString() + " KB"));
+                _Informations.Add(new Models.InformationModel("Frame Color Depth", Preview.Format.BitsPerPixel.ToString() + "BPP"));
+                _Informations.Add(new Models.InformationModel("Frame Decoder", (SelectedFrame.Type == Models.IconFrameModelType.PNG) ? "WIC PNG" : "WIC BMP"));
 
-                _Informations.Add(new Models.IconInformationModel("Icon Size",
+                _Informations.Add(new Models.InformationModel("Icon Size",
                                 string.Format("{0}x{1}", new object[] { Frames.Biggest().Size.Width, Frames.Biggest().Size.Width })));
                 long iconsize;
                 System.IO.MemoryStream iconmem = new System.IO.MemoryStream();
@@ -127,7 +127,8 @@ namespace HL.IconPro.MVVM.ViewModels
                 iconsize = (long)Math.Round((double)(iconmem.Length / 1000));
                 iconmem.Close();
 
-                _Informations.Add(new Models.IconInformationModel("Icon Physical Size", iconsize.ToString() + " KB"));
+                _Informations.Add(new Models.InformationModel("Extimated file size", iconsize.ToString() + " KB"));
+                GC.Collect();
             }
             catch { }
         }
@@ -135,10 +136,25 @@ namespace HL.IconPro.MVVM.ViewModels
         {
             IconPro.Lib.Wpf.IconBitmapEncoder encoder = new Lib.Wpf.IconBitmapEncoder();
             encoder.UsePngCompression = compression;
-            foreach (Models.IconFrameModel fr in _Frames)
+            foreach (Models.FrameModel fr in _Frames)
             {
                 encoder.Frames.Add(System.Windows.Media.Imaging.BitmapFrame.Create(fr.Frame));
             }
+            encoder.Save(Output);
+            encoder = null;
+        }
+        public void SaveCursor(System.IO.Stream Output, bool compression)
+        {
+            IconPro.Lib.Wpf.CursorBitmapEncoder encoder = new Lib.Wpf.CursorBitmapEncoder();
+            encoder.UsePngCompression = compression;
+
+            foreach (Models.FrameModel fr in _Frames)
+            {
+                var frame = System.Windows.Media.Imaging.BitmapFrame.Create(fr.Frame);
+                encoder.Frames.Add(frame);
+                encoder.SetHotspot(frame, fr.HotspotX, fr.HotspotY);
+            }
+
             encoder.Save(Output);
             encoder = null;
         }
@@ -151,7 +167,7 @@ namespace HL.IconPro.MVVM.ViewModels
             //   System.Windows.Media.Imaging.IconBitmapDecoder(Source, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
             foreach (BitmapFrame bp in decoder.Frames)
             {
-                _Frames.AddWithoutSort(new Models.IconFrameModel(bp, bp.Decoder));
+                _Frames.AddWithoutSort(new Models.FrameModel(bp, bp.Decoder));
             }
             decoder = null;
             if (_Frames?.Count > 0) SelectedFrame = _Frames[0];
@@ -162,7 +178,7 @@ namespace HL.IconPro.MVVM.ViewModels
             decoder.Open(Source);
             foreach (BitmapFrame bp in decoder.Frames)
             {
-                _Frames.AddWithoutSort(new Models.IconFrameModel(bp, bp.Decoder));
+                _Frames.AddWithoutSort(new Models.FrameModel(bp, bp.Decoder));
             }
             decoder = null;
             if (_Frames?.Count > 0) SelectedFrame = _Frames[0];
@@ -173,7 +189,7 @@ namespace HL.IconPro.MVVM.ViewModels
             decoder.Open(Source);
             foreach (BitmapFrame bp in decoder.Frames)
             {
-                _Frames.AddWithoutSort(new Models.IconFrameModel(bp, bp.Decoder));
+                _Frames.AddWithoutSort(new Models.FrameModel(bp, bp.Decoder));
             }
             decoder = null;
             if (_Frames?.Count > 0) SelectedFrame = _Frames[0];
@@ -278,7 +294,7 @@ namespace HL.IconPro.MVVM.ViewModels
                                      System.Windows.MessageBoxImage.Error);
                                  return;
                              }
-                             foreach (HL.IconPro.MVVM.Models.IconFrameModel item in _Frames)
+                             foreach (HL.IconPro.MVVM.Models.FrameModel item in _Frames)
                              {
                                  string itemPath =
                                      string.Format("{0}\\{1}x{1} - {2}BPP.png",
@@ -359,7 +375,7 @@ namespace HL.IconPro.MVVM.ViewModels
                              window.DataContext = VM;
                              window.ShowDialog();
                              if (VM.Result != null)
-                                 _Frames.Add(new Models.IconFrameModel(VM.Result, VM.Result.Decoder));
+                                 _Frames.Add(new Models.FrameModel(VM.Result, VM.Result.Decoder));
                          }
                      })));
             }

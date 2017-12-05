@@ -1,13 +1,13 @@
 ﻿<Window
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	x:Class="HL.IconPro.CreateIconFromImage"
+	x:Class="HL.IconPro.CreateFromImage"
 	x:Name="Window"
     xmlns:vm="clr-namespace:HL.IconPro.MVVM.ViewModels"
 	Title="ICON WIZARD"
 	Width="448" Height="493.6" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/iconpro;component/Icon Pro.ico">
     <Window.DataContext>
-        <vm:CreateIconFromImageViewModel/>
+        <vm:CreateFromImageViewModel/>
     </Window.DataContext>
     <Window.Background>
 		<SolidColorBrush Color="{DynamicResource WindowBackgroundColor}"/>

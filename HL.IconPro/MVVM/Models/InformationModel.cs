@@ -7,11 +7,11 @@ using HL.MVVM;
 
 namespace HL.IconPro.MVVM.Models
 {
-    class IconInformationModel : ModelBase
+    class InformationModel : ModelBase
     {
         private string _name, _value;
 
-        public IconInformationModel(string Name, string Value)
+        public InformationModel(string Name, string Value)
         {
             _name = Name;
             _value = Value;

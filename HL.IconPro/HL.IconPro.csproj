@@ -61,6 +61,9 @@
   <PropertyGroup>
     <ApplicationIcon>Icon Pro.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -104,7 +107,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MVVM\Views\CreateIconFromImage.xaml">
+    <Page Include="MVVM\Views\CreateFromImage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -131,18 +134,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MVVM\Models\FrameSizeModel.cs" />
-    <Compile Include="MVVM\Models\IconFrameModel.cs" />
-    <Compile Include="MVVM\Models\IconFrameModelObservableCollection.cs" />
-    <Compile Include="MVVM\Models\IconInformationModel.cs" />
+    <Compile Include="MVVM\Models\FrameModel.cs" />
+    <Compile Include="MVVM\Models\FrameModelObservableCollection.cs" />
+    <Compile Include="MVVM\Models\InformationModel.cs" />
     <Compile Include="MVVM\ViewModels\CreateFrameViewModel.cs" />
-    <Compile Include="MVVM\ViewModels\CreateIconFromImageViewModel.cs" />
+    <Compile Include="MVVM\ViewModels\CreateFromImageViewModel.cs" />
     <Compile Include="MVVM\ViewModels\MainWindowViewModel.cs" />
     <Compile Include="MVVM\ViewModels\WelcomeWindowViewModel.cs" />
     <Compile Include="MVVM\Views\CreateFrame.xaml.cs">
       <DependentUpon>CreateFrame.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\Views\CreateIconFromImage.xaml.cs">
-      <DependentUpon>CreateIconFromImage.xaml</DependentUpon>
+    <Compile Include="MVVM\Views\CreateFromImage.xaml.cs">
+      <DependentUpon>CreateFromImage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\Views\WelcomeWindow.xaml.cs">
       <DependentUpon>WelcomeWindow.xaml</DependentUpon>
@@ -164,6 +167,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.manifest">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

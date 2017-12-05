@@ -26,7 +26,7 @@ namespace HL.IconPro.MVVM.ViewModels
             _SupportedSizes = new Dictionary<int, string>();
             _BitDepths = new Dictionary<int, string>();
             _Source = Source;
-            foreach (int size in CreateIconFromImageViewModel.IconSizes)
+            foreach (int size in CreateFromImageViewModel.IconSizes)
             {
                 if (size > Source.PixelWidth) break;
                 _SupportedSizes.Add(size, string.Format("{0} x {0}", size));
