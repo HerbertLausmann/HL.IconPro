@@ -69,7 +69,7 @@ namespace HL.IconPro.Lib.Wpf
                 pngEncoder.Save(frameBuffer);
                 pngEncoder = null;
                 frameBuffer.Position = 0;
-                return frameBuffer.GetBuffer();
+                return frameBuffer.ToArray();
             }
             else
             {
@@ -78,7 +78,7 @@ namespace HL.IconPro.Lib.Wpf
                 System.IO.MemoryStream frameBuffer = new System.IO.MemoryStream();
                 bmpEncoder.Save(frameBuffer);
                 bmpEncoder = null;
-                return frameBuffer.GetBuffer();
+                return frameBuffer.ToArray();
             }
         }
         protected BitmapPalette GetPalette(Core.RGBQUAD[] ColorTable, bool opaque)

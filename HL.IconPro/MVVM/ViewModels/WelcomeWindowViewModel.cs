@@ -7,6 +7,11 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Reflection;
 using HL.MVVM;
+using System.Windows.Controls;
+using static System.Net.Mime.MediaTypeNames;
+using System.Windows;
+using System.IO;
+using System.Diagnostics;
 
 namespace HL.IconPro.MVVM.ViewModels
 {
@@ -49,9 +54,88 @@ namespace HL.IconPro.MVVM.ViewModels
         #endregion
 
         #region Procedures
+
+        public void FastConversion(WelcomeWindow Source)
+        {
+        entry: Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
+            dialog.Filter = "PNG/SVG file(*.png;*.svg)|*.png;*.svg";
+            dialog.CheckFileExists = true;
+            if (dialog.ShowDialog(Source) == false) return;
+            CreateFromImageViewModel mwvm = null;
+
+            System.IO.FileStream fs = new System.IO.FileStream(dialog.FileName, System.IO.FileMode.Open);
+            BitmapFrame frame = null;
+
+            if (dialog.FileName.ToLower().EndsWith(".png"))
+            {
+                BitmapDecoder dec =
+                                BitmapDecoder.Create(fs, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
+                frame = dec.Frames[0];
+            }
+            else
+            {
+                frame = BitmapFrame.Create(Lib.Wpf.Tools.SVGConverter.GetBitmapSource(fs));
+            }
+
+            fs.Close();
+
+            if (frame.PixelWidth != frame.PixelHeight)
+            {
+                if (System.Windows.MessageBox.Show("The selected source is not square. Would you like to try another image?",
+                     "Invalid Image", System.Windows.MessageBoxButton.YesNo, System.Windows.MessageBoxImage.Exclamation) == System.Windows.MessageBoxResult.Yes)
+                {
+                    goto entry;
+                }
+            }
+
+            Microsoft.Win32.SaveFileDialog dialog2 = new Microsoft.Win32.SaveFileDialog();
+            dialog2.Filter = "Compressed Icon File (*.ico)|*.ico";
+
+            dialog2.AddExtension = true;
+            dialog2.CheckPathExists = true;
+            if (dialog2.ShowDialog() == false) return;
+
+            IconPro.Lib.Wpf.IconBitmapEncoder encoder = new Lib.Wpf.IconBitmapEncoder();
+            encoder.UsePngCompression = true;
+            var f16 = Lib.Wpf.Helpers.GetResized(frame, 16);
+            var f24 = Lib.Wpf.Helpers.GetResized(frame, 24);
+            var f32 = Lib.Wpf.Helpers.GetResized(frame, 32);
+            var f48 = Lib.Wpf.Helpers.GetResized(frame, 48);
+            var f64 = Lib.Wpf.Helpers.GetResized(frame, 64);
+            var f256 = Lib.Wpf.Helpers.GetResized(frame, 256);
+            encoder.Frames.Add(BitmapFrame.Create(f16));
+            encoder.Frames.Add(BitmapFrame.Create(f24));
+            encoder.Frames.Add(BitmapFrame.Create(f32));
+            encoder.Frames.Add(BitmapFrame.Create(f48));
+            encoder.Frames.Add(BitmapFrame.Create(f64));
+            encoder.Frames.Add(BitmapFrame.Create(f256));
+
+            FileStream Output = new FileStream(dialog2.FileName, FileMode.Create, FileAccess.Write);
+            encoder.Save(Output);
+            Output.Flush();
+            Output.Close();
+
+            OpenFileExplorer(dialog2.FileName);
+
+        }
+
+        private static void OpenFileExplorer(string path)
+        {
+            if (!File.Exists(path))
+            {
+                return;
+            }
+
+            // combine the arguments together
+            // it doesn't matter if there is a space after ','
+            string argument = "/select, \"" + path + "\"";
+
+            System.Diagnostics.Process.Start("explorer.exe", argument);
+        }
+
         private void FromStaticImage(WelcomeWindow Source)
         {
-            entry: Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
+        entry: Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
             dialog.Filter = "PNG/SVG file(*.png;*.svg)|*.png;*.svg";
             dialog.CheckFileExists = true;
             if (dialog.ShowDialog(Source) == false) return;
@@ -168,6 +252,19 @@ namespace HL.IconPro.MVVM.ViewModels
                         //else
                         //FromFolderSource((WelcomeWindow)parameter);
                     })));
+            }
+        }
+        public ICommand FastImageToIconCommand
+        {
+            get
+            {
+                return GetCommand(new RelayCommand(new Action<object>((object parameter) =>
+                {
+                    //if (!Keyboard.IsKeyDown(Key.LeftCtrl))
+                    FastConversion((WelcomeWindow)parameter);
+                    //else
+                    //FromFolderSource((WelcomeWindow)parameter);
+                })));
             }
         }
         public ICommand CreateFromFolderCommand
